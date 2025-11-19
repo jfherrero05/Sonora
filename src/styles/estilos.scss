@@ -1,4 +1,10 @@
-//Archivo principal de estilos
-@import "variables"; // Importa las variables de estilo
-@import "main"; // Importa los estilos principales
-@import "galery"; // Importa los estilos de la galería
+// src/styles/estilos.scss
+
+// 1. VARIABLES: ESTA DEBE SER LA PRIMERA IMPORTACIÓN
+@import 'variables';
+
+// 2. MAIN: Ahora puede usar las variables
+@import 'main';
+
+// 3. GALLERY Y OTROS COMPONENTES
+@import 'gallery';

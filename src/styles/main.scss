@@ -1,0 +1,131 @@
+// src/styles/_main.scss
+
+// Estilos globales de la página y tipografía base
+body {
+    font-family: $font-main;
+    background-color: $color-bg; // Fondo principal oscuro
+    color: $color-texto; // Texto principal blanco
+    margin: 0;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; // Para asegurar que el footer quede abajo
+}
+
+// Estilo de enlaces para que usen el color de acento
+a {
+    color: $color-acento;
+    text-decoration: none;
+
+    &:hover {
+        color: $color-acento-light;
+    }
+}
+
+// Contenedor principal para centrar el contenido
+.main-content {
+    flex-grow: 1; // Permite que el contenido principal ocupe todo el espacio disponible
+    padding: $spacing-unit * 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+// Estilo para el pie de página
+footer {
+    background-color: $color-pie-pagina; // Color de fondo del pie de página
+    color: $color-texto-footer; // Texto negro en el pie de página
+    padding: $spacing-unit * 1.5;
+    text-align: center;
+    margin-top: auto; // Empuja el footer hacia abajo
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////
+.music-player-card {
+    // 1. Contenedor General
+    background-color: $color-panel;
+    color: $color-texto;
+    border-radius: 8px;
+    padding: 1.5rem;
+    max-width: 350px; // Tamaño típico de una card de reproductor
+    margin: 2rem auto; // Centrar para demostración
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); // Sombra fuerte en tema oscuro
+
+    // 2. Información de la canción
+    &__info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    &__cover {
+        width: 60px;
+        height: 60px;
+        border-radius: 4px;
+        margin-right: 1rem;
+        object-fit: cover;
+    }
+
+    &__details {
+        .title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .artist {
+            font-size: 0.9rem;
+            color: $color-texto-secundario;
+            margin: 0;
+        }
+    }
+
+    // 3. Barra de Progreso
+    &__progress-bar {
+        height: 5px;
+        background-color: $color-slider-bg;
+        border-radius: 5px;
+        margin: 1rem 0;
+        position: relative;
+
+        .progress {
+            height: 100%;
+            width: 40%; // Ejemplo: 40% de progreso
+            background-color: $color-slider;
+            border-radius: 5px;
+        }
+    }
+
+    // 4. Controles de Reproducción
+    &__controls {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 1.5rem;
+    }
+
+    &__control-btn {
+        background: none;
+        border: none;
+        color: $color-texto;
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        transition: color 0.2s;
+
+        &:hover {
+            color: $color-acento; // Usa el color de acento para hover
+        }
+
+        &.play-pause {
+            // Estilo para el botón principal (Play/Pause)
+            font-size: 2rem;
+            color: $color-acento;
+        }
+    }
+}

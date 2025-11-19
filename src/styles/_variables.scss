@@ -21,3 +21,7 @@ $color-bar: #D9D9D9; // Fondo de la barra de descarga
 
 //Tipografía
 $font-main: 'Roboto', sans-serif; // Fuente principal de la interfaz [cite: 4]
+
+// Espaciado y Sombra
+$spacing-unit: 1rem; // o el valor que uses (8px, 10px, etc.)
+$shadow-elevation-1: 0 4px 8px rgba(0, 0, 0, 0.4); // Sombra ligera para tarjetas y modales
