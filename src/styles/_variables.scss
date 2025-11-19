@@ -1,0 +1,23 @@
+//Color para texto
+$color-texto: #FFFFFF; // Texto principal en alto contraste
+$color-texto-secundario: #B6B6B6;// Texto auxiliar (categorías, iconos inactivos)
+$color-texto-footer: #000000;// Color del texto del pie de página
+
+//Colores de fondo
+$color-bg: #121016; //Fondo principal (oscuro)
+$color-panel: #1E1C23; // Fondo del panel
+$color-pie-pagina: #A24914; // Fondo del pie de página
+
+//Colores de acento y interacciones
+$color-acento: #FF6B00; // Color de acento principal (botones, enlaces)
+$color-acento-light: #FF8C33; // Color de acento secundario (hover, active)
+$color-borde: #FF6B00; // Color de borde
+
+//Colores de componentes específicos (Barras de progreso y descarga)
+$color-slider: #FF6B00; // Barra de progreso de audios
+$color-slider-bg: #2C2C34; // Fondo de la barra de progreso
+$color-descarga: #4ECD00; // Barra de descarga en progreso
+$color-bar: #D9D9D9; // Fondo de la barra de descarga
+
+//Tipografía
+$font-main: 'Roboto', sans-serif; // Fuente principal de la interfaz [cite: 4]
