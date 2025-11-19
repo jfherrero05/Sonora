@@ -1,1 +1,56 @@
-<p>subida-archivos works!</p>
+<div class="upload-page-container">
+    <div class="upload-form-box">
+        <header class="upload-form-header">
+            <img src="assets/sonora-logo.png" alt="Sonora Logo" class="logo">
+            <div class="profile-img-circle static">
+                <p>img perfil</p>
+            </div>
+        </header>
+
+        <form class="upload-form">
+            <div class="form-fields">
+                <div class="form-group file-upload-group">
+                    <input type="file" id="file-upload" class="hidden-file-input">
+                    <label for="file-upload" class="custom-file-label text-input">Introduzca el archivo mp3</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Nombre el archivo" class="text-input" required>
+                </div>
+                <div class="form-group">
+                    <select class="text-input" required>
+                        <option value="" disabled selected>Seleccione categoría</option>
+                        <option value="naturaleza">Naturaleza</option>
+                        <option value="instrumentos">Instrumentos</option>
+                        <option value="gritos">Gritos</option>
+                        </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Autor" class="text-input" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Descripción" class="text-input" required>
+                </div>
+                <div class="form-group">
+                    <textarea rows="3" class="text-input"></textarea>
+                </div>
+            </div>
+
+            <div class="upload-status-area">
+                <div class="upload-icon">⬆️</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 29%;"></div>
+                </div>
+                <p class="progress-percentage">29%</p>
+            </div>
+
+            <button type="submit" class="btn-confirmar">confirmar</button>
+        </form>
+    </div>
+
+    <footer class="footer">
+        <div class="dev-info">
+            </div>
+        <div class="footer-links">
+            </div>
+    </footer>
+</div>
