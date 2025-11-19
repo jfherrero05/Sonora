@@ -5,8 +5,7 @@
         </div>
         <div class="user-area">
             <button class="btn-primary login-btn">INICIAR SESIÓN</button>
-            
-            </div>
+        </div>
     </header>
 
     <div class="content-area">
@@ -42,22 +41,26 @@
             <h2 class="section-title">tops download</h2>
             <div class="sound-carousel">
                 <button class="carousel-arrow">←</button>
-                <div class="sound-card">
-                    <p class="sound-title">sonidos populares</p>
-                    <div class="audio-player-placeholder"></div>
+
+                <div class="sound-card" *ngFor="let sonido of listaSonidos">
+                    
+                    <img [src]="sonido.imgUrl" alt="img" style="width: 100%; height: 100px; object-fit: cover; border-radius: 5px; margin-bottom: 5px;">
+                    
+                    <p class="sound-title">{{ sonido.titulo }}</p>
+                    
+                    <div class="audio-player-container">
+                        <audio controls style="width: 100%; height: 30px;">
+                            <source [src]="sonido.audioUrl" type="audio/mpeg">
+                            Tu navegador no soporta audio.
+                        </audio>
+                    </div>
+
                 </div>
-                <div class="sound-card">
-                    <p class="sound-title">sonidos populares</p>
-                    <div class="audio-player-placeholder"></div>
-                </div>
-                <div class="sound-card">
-                    <p class="sound-title">sonidos populares</p>
-                    <div class="audio-player-placeholder"></div>
-                </div>
+                <p *ngIf="listaSonidos.length === 0" style="color: white;">Cargando sonidos...</p>
+
                 <button class="carousel-arrow">→</button>
             </div>
         </div>
-        
         <div class="sound-section">
             <h2 class="section-title">sonidos de naturaleza</h2>
             <div class="sound-carousel">
@@ -91,30 +94,6 @@
             </div>
         </div>
     </div>
-    <div class="music-player-card">
-    <div class="music-player-card__info">
-        <img class="music-player-card__cover" src="ruta/a/la/cubierta.jpg" alt="Cubierta del álbum">
-        <div class="music-player-card__details">
-            <p class="title">Título de la Canción Aquí</p>
-            <p class="artist">Nombre del Artista</p>
-        </div>
-    </div>
-
-    <div class="music-player-card__progress-bar">
-        <div class="progress" style="width: 40%;"></div>
-    </div>
-    
-    <div class="music-player-card__controls">
-        <button class="music-player-card__control-btn">
-            &lt;&lt; </button>
-        
-        <button class="music-player-card__control-btn play-pause">
-            &#9658; </button>
-        
-        <button class="music-player-card__control-btn">
-            &gt;&gt; </button>
-    </div>
-</div>
 
     <footer class="footer">
         <div class="dev-info">
