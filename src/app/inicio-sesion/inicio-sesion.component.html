@@ -9,35 +9,30 @@
             <p>Editar foto de perfil</p>
         </div>
 
-        <form class="login-form">
+        <form class="login-form" [formGroup]="formularioLogin" (ngSubmit)="onSubmit()">
+            
             <div class="form-group">
                 <label for="email">Correo electronico:</label>
-                <input type="email" id="email" name="email" value="vjuancarlosdorado.23campuscara.es" class="text-input" required>
+                <input type="email" id="email" formControlName="email" class="text-input" placeholder="ejemplo@correo.com">
+                
+                <small *ngIf="formularioLogin.get('email')?.invalid && formularioLogin.get('email')?.touched" style="color: red; display: block; margin-top: 5px;">
+                    Introduce un correo válido
+                </small>
             </div>
 
             <div class="form-group">
                 <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" value="************" class="text-input" required>
+                <input type="password" id="password" formControlName="password" class="text-input" placeholder="************">
+                 
+                <small *ngIf="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched" style="color: red; display: block; margin-top: 5px;">
+                    Mínimo 6 caracteres
+                </small>
             </div>
             
-            <p class="register-link">¿No tienes cuenta aún? <a href="#">Regístrate</a></p>
+            <p class="register-link">¿No tienes cuenta aún? <a routerLink="/registro">Regístrate</a></p>
 
-            <button type="submit" class="btn-confirmar">Confirmar</button>
+            <button type="submit" class="btn-confirmar" [disabled]="formularioLogin.invalid">Confirmar</button>
         </form>
     </div>
 
-    <footer class="footer">
-        <div class="dev-info">
-            <p>Web desarrollada por:</p>
-            <ul>
-                <li>Juan Carlos Dorado López</li>
-                <li>Juan Francisco Herrero Santibañez</li>
-                <li>Hugo Díaz Vazquez</li>
-            </ul>
-        </div>
-        <div class="footer-links">
-            <p>About Sonora | Terms of use | Privacy | Cookies</p>
-            <p class="sonora-logo-text">SONORA</p>
-        </div>
-    </footer>
 </div>

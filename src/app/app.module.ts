@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+// 1. IMPORTAMOS EL MÓDULO DE FORMULARIOS AQUÍ
+import { ReactiveFormsModule } from '@angular/forms'; // <--- AÑADE ESTO
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,7 +20,9 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    // 2. Y LO REGISTRAMOS AQUÍ ABAJO
+    ReactiveFormsModule // <--- AÑADE ESTO
   ],
   providers: [],
   bootstrap: [AppComponent]

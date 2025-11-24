@@ -8,48 +8,53 @@
             <p>img perfil</p>
         </div>
 
-        <form class="register-form">
+        <form class="register-form" [formGroup]="formularioRegistro" (ngSubmit)="onSubmit()">
+            
             <div class="form-group">
-                <input type="text" placeholder="introduzca el nombre" class="text-input" required>
-            </div>
-            <div class="form-group">
-                <input type="text" placeholder="Introduzcan los apellidos" class="text-input" required>
-            </div>
-            <div class="form-group">
-                <input type="email" placeholder="Correo electronico" class="text-input" required>
-            </div>
-            <div class="form-group">
-                <input type="password" placeholder="Contraseña" class="text-input" required>
-            </div>
-            <div class="form-group password-hint">
-                <p>Añadir descripción sobre la longitud y complejidad de la contraseña.</p>
-            </div>
-            <div class="form-group">
-                <input type="password" placeholder="Repita contraseña" class="text-input" required>
-            </div>
-            <div class="form-group country-input">
-                <input type="text" placeholder="País" class="text-input short-input" required>
-            </div>
-            <div class="form-group empty-input">
-                <input type="text" class="text-input" required>
+                <input type="text" formControlName="nombre" placeholder="Introduzca el nombre" class="text-input">
+                <small *ngIf="formularioRegistro.get('nombre')?.invalid && formularioRegistro.get('nombre')?.touched" style="color: red; font-size: 0.8em;">
+                    Nombre obligatorio
+                </small>
             </div>
 
-            <button type="submit" class="btn-confirmar">confirmar</button>
+            <div class="form-group">
+                <input type="text" formControlName="apellidos" placeholder="Introduzcan los apellidos" class="text-input">
+            </div>
+
+            <div class="form-group">
+                <input type="email" formControlName="email" placeholder="Correo electronico" class="text-input">
+                <small *ngIf="formularioRegistro.get('email')?.invalid && formularioRegistro.get('email')?.touched" style="color: red; font-size: 0.8em;">
+                    Email inválido
+                </small>
+            </div>
+
+            <div class="form-group">
+                <input type="password" formControlName="password" placeholder="Contraseña" class="text-input">
+            </div>
+
+            <div class="form-group password-hint">
+                <p>La contraseña debe tener al menos 6 caracteres.</p>
+            </div>
+
+            <div class="form-group">
+                <input type="password" formControlName="confirmPassword" placeholder="Repita contraseña" class="text-input">
+            </div>
+
+            <div class="form-group country-input">
+                <input type="text" formControlName="pais" placeholder="País" class="text-input short-input">
+            </div>
+
+            <div class="form-group empty-input">
+                <input type="text" formControlName="ciudad" placeholder="Ciudad" class="text-input">
+            </div>
+
+            <button type="submit" class="btn-confirmar" [disabled]="formularioRegistro.invalid">confirmar</button>
+        
+            <p style="text-align: center; margin-top: 10px; font-size: 0.9em;">
+                <a routerLink="/login" style="color: white;">Volver al Login</a>
+            </p>
+
         </form>
     </div>
 
-    <footer class="footer">
-        <div class="dev-info">
-            <p>Web desarrollada por:</p>
-            <ul>
-                <li>Juan Carlos Dorado López</li>
-                <li>Juan Francisco Herrero Santibañez</li>
-                <li>Hugo Díaz Vazquez</li>
-            </ul>
-        </div>
-        <div class="footer-links">
-            <p>About Sonora | Terms of use | Privacy | Cookies</p>
-            <p class="sonora-logo-text">SONORA</p>
-        </div>
-    </footer>
 </div>
