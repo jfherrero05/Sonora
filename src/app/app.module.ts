@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 import { SubidaArchivosComponent } from './subida-archivos/subida-archivos.component';
 import { RegistroSesionComponent } from './registro-sesion/registro-sesion.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioSesionComponent,
     SubidaArchivosComponent,
-    RegistroSesionComponent
+    RegistroSesionComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

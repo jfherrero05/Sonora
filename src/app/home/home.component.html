@@ -1,0 +1,87 @@
+<div class="content-area">
+    <div class="search-bar">
+        <input type="text" placeholder="Buscar...">
+        <span class="search-hint">Encuentre todo tipo de sonidos</span>
+    </div>
+
+    <div class="info-box">
+        <h3>Que es sonora</h3>
+        <p>Sonora es un espacio web donde puedes encontrar gran variedad de sonidos de libre uso (Sin copyright).</p>
+        <p>Una web desarrollada por 3 estudiantes de Desarrollo de aplicaciones web</p>
+        <p>Actualmente contamos con una variedad limitada de sonidos pero con tu ayuda podemos desarrollar una gran web de plugins.</p>
+    </div>
+
+    <div class="categories">
+        <h2>categorías</h2>
+        <div class="category-list">
+            <span class="category-item">Naturaleza</span>
+            <span class="category-item">Instrumentos</span>
+            <span class="category-item">Gritos</span>
+            <span class="category-item">Musica</span>
+            <span class="category-item special-category">Efectos especiales</span>
+            <span class="category-item">Notificacion</span>
+            <span class="category-item">Transicion</span>
+            <span class="category-item">Silbidos</span>
+            <span class="category-item">Coches</span>
+            <span class="category-item">Motos</span>
+        </div>
+    </div>
+
+    <div class="sound-section">
+        <h2 class="section-title">tops download</h2>
+        <div class="sound-carousel">
+            <button class="carousel-arrow">←</button>
+
+            <div class="sound-card" *ngFor="let sonido of listaSonidos">
+                
+                <img [src]="sonido.imgUrl" alt="img" style="width: 100%; height: 100px; object-fit: cover; border-radius: 5px; margin-bottom: 5px;">
+                
+                <p class="sound-title">{{ sonido.titulo }}</p>
+                
+                <div class="audio-player-container">
+                    <audio controls style="width: 100%; height: 30px;">
+                        <source [src]="sonido.audioUrl" type="audio/mpeg">
+                        Tu navegador no soporta audio.
+                    </audio>
+                </div>
+
+            </div>
+            <p *ngIf="listaSonidos.length === 0" style="color: white;">Cargando sonidos...</p>
+
+            <button class="carousel-arrow">→</button>
+        </div>
+    </div>
+    
+    <div class="sound-section">
+        <h2 class="section-title">sonidos de naturaleza</h2>
+        <div class="sound-carousel">
+            <button class="carousel-arrow">←</button>
+            <div class="sound-card"></div>
+            <div class="sound-card"></div>
+            <div class="sound-card"></div>
+            <button class="carousel-arrow">→</button>
+        </div>
+    </div>
+
+    <div class="sound-section">
+        <h2 class="section-title">sonidos de instrumentos</h2>
+        <div class="sound-carousel">
+            <button class="carousel-arrow">←</button>
+            <div class="sound-card"></div>
+            <div class="sound-card"></div>
+            <div class="sound-card"></div>
+            <button class="carousel-arrow">→</button>
+        </div>
+    </div>
+
+    <div class="sound-section">
+        <h2 class="section-title">sonidos extraños</h2>
+        <div class="sound-carousel">
+            <button class="carousel-arrow">←</button>
+            <div class="sound-card"></div>
+            <div class="sound-card"></div>
+            <div class="sound-card"></div>
+            <button class="carousel-arrow">→</button>
+        </div>
+    </div>
+</div>
