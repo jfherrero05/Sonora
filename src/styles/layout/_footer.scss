@@ -1,0 +1,79 @@
+// src/styles/layout/_footer.scss
+@use '../mixins' as *;
+@use '../variables' as *;
+
+// ==========================================================================
+// LAYOUT: PIE DE PÁGINA (FOOTER)
+// ==========================================================================
+
+.pie-pagina-principal {
+    background-color: $color-pie-pagina; // Color tierra/naranja oscuro
+    color: #000; // Texto oscuro para contraste
+    padding: 20px 40px;
+    margin-top: 50px; // Separación del contenido principal
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; // Alinear elementos abajo
+    font-size: 0.8rem;
+
+    // Columna Izquierda: Información de desarrolladores
+    .pie-izquierda {
+        // Renombrado de .footer-left
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        strong {
+            margin-bottom: 5px;
+            display: block;
+        }
+    }
+
+    // Columna Central: Logo y Enlaces
+    .pie-centro {
+        // Renombrado de .footer-center
+        text-align: center;
+
+        .logo-pie {
+            // Renombrado de .footer-logo
+            font-size: 1.5rem;
+            color: $color-acento; // Naranja brillante
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .enlaces-pie {
+            // Renombrado de .footer-links
+            display: flex;
+            gap: 15px;
+
+            a {
+                text-decoration: none;
+                color: #000;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    // Columna Derecha: Icono decorativo
+    .pie-derecha {
+        // Renombrado de .footer-right
+        font-size: 2rem;
+        color: $color-acento;
+    }
+
+    // Ajuste Responsive para móviles
+    @include responder-a(sm) {
+        // Usando el mixin renombrado
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+}

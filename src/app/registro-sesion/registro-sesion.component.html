@@ -1,60 +1,77 @@
-<div class="auth-page-container register-page">
-    <div class="header-logo-only">
-        <img src="assets/sonora-logo.png" alt="Sonora Logo" class="logo">
-    </div>
-    
-    <div class="auth-form-box">
-        <div class="profile-img-circle static">
-            <p>img perfil</p>
+<div class="pagina-registro">
+    <div class="tarjeta-registro">
+        <div class="contenido-registro">
+
+            <div class="columna-izquierda">
+                <form class="formulario-registro" [formGroup]="formularioRegistro" (ngSubmit)="onSubmit()">
+
+                    <div class="grupo-formulario">
+                        <input type="text" formControlName="nombre" placeholder="introduzca el nombre"
+                            class="control-formulario">
+                        <small
+                            *ngIf="formularioRegistro.get('nombre')?.invalid && formularioRegistro.get('nombre')?.touched"
+                            style="color: red; font-size: 0.8em; display: block; margin-top: 5px;">
+                            Nombre obligatorio
+                        </small>
+                    </div>
+
+                    <div class="grupo-formulario">
+                        <input type="text" formControlName="apellidos" placeholder="Introduzcan los apellidos"
+                            class="control-formulario">
+                    </div>
+
+                    <div class="grupo-formulario">
+                        <input type="email" formControlName="email" placeholder="Correo electronico"
+                            class="control-formulario">
+                        <small
+                            *ngIf="formularioRegistro.get('email')?.invalid && formularioRegistro.get('email')?.touched"
+                            style="color: red; font-size: 0.8em; display: block; margin-top: 5px;">
+                            Email inválido
+                        </small>
+                    </div>
+
+                    <div class="grupo-formulario">
+                        <input type="password" formControlName="password" placeholder="Contraseña"
+                            class="control-formulario">
+                    </div>
+                    <!-- Password hint moved or removed? Design doesn't clearly show it but good to keep inside form logic if needed, but SCSS doesn't have specific class for it. I'll keep it simple or remove if breaks layout. SCSS has gap 15px. -->
+
+                    <div class="grupo-formulario">
+                        <input type="password" formControlName="confirmPassword" placeholder="Repita contraseña"
+                            class="control-formulario">
+                    </div>
+
+                    <div class="grupo-formulario">
+                        <input type="text" formControlName="pais" placeholder="Pais" class="control-formulario">
+                    </div>
+
+                    <!-- "About Freesound Terms of use Privacy Cookies" link row from design image 1? 
+                          Image 1 shows these links BETWEEN Contraseña and Repita contraseña? No, it looks like a footer valid on that page or just texts. 
+                          Wait, existing HTML had "empty-input" for city.
+                          Design Image 1 has: Nombre, Apellidos, Correo, Password, (Links?), Repita Password, Pais, (Empty bar).
+                          The empty bar might be City or just an empty input as per previous HTML.
+                     -->
+
+
+                    <div class="acciones-registro">
+                        <button type="submit" class="boton-confirmar"
+                            [disabled]="formularioRegistro.invalid">confirmar</button>
+                    </div>
+
+                    <div class="enlaces-extra">
+                        <a routerLink="/login">Volver al Login</a>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="columna-derecha">
+                <div class="circulo-perfil">
+                    <span>img</span>
+                    <span>perfil</span>
+                </div>
+            </div>
+
         </div>
-
-        <form class="register-form" [formGroup]="formularioRegistro" (ngSubmit)="onSubmit()">
-            
-            <div class="form-group">
-                <input type="text" formControlName="nombre" placeholder="Introduzca el nombre" class="text-input">
-                <small *ngIf="formularioRegistro.get('nombre')?.invalid && formularioRegistro.get('nombre')?.touched" style="color: red; font-size: 0.8em;">
-                    Nombre obligatorio
-                </small>
-            </div>
-
-            <div class="form-group">
-                <input type="text" formControlName="apellidos" placeholder="Introduzcan los apellidos" class="text-input">
-            </div>
-
-            <div class="form-group">
-                <input type="email" formControlName="email" placeholder="Correo electronico" class="text-input">
-                <small *ngIf="formularioRegistro.get('email')?.invalid && formularioRegistro.get('email')?.touched" style="color: red; font-size: 0.8em;">
-                    Email inválido
-                </small>
-            </div>
-
-            <div class="form-group">
-                <input type="password" formControlName="password" placeholder="Contraseña" class="text-input">
-            </div>
-
-            <div class="form-group password-hint">
-                <p>La contraseña debe tener al menos 6 caracteres.</p>
-            </div>
-
-            <div class="form-group">
-                <input type="password" formControlName="confirmPassword" placeholder="Repita contraseña" class="text-input">
-            </div>
-
-            <div class="form-group country-input">
-                <input type="text" formControlName="pais" placeholder="País" class="text-input short-input">
-            </div>
-
-            <div class="form-group empty-input">
-                <input type="text" formControlName="ciudad" placeholder="Ciudad" class="text-input">
-            </div>
-
-            <button type="submit" class="btn-confirmar" [disabled]="formularioRegistro.invalid">confirmar</button>
-        
-            <p style="text-align: center; margin-top: 10px; font-size: 0.9em;">
-                <a routerLink="/login" style="color: white;">Volver al Login</a>
-            </p>
-
-        </form>
     </div>
-
 </div>

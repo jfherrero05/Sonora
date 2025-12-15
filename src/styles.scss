@@ -1,4 +1,2 @@
-/* src/styles.scss */
-
-// Solo debe importar tu archivo maestro de orquestación
-@import 'styles/estilos';
+/* Archivo principal de estilos de la aplicación */
+@use "styles/main";

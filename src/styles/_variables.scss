@@ -1,27 +1,55 @@
-//Color para texto
-$color-texto: #FFFFFF; // Texto principal en alto contraste
-$color-texto-secundario: #B6B6B6;// Texto auxiliar (categorías, iconos inactivos)
-$color-texto-footer: #000000;// Color del texto del pie de página
+// ==========================================================================
+// VARIABLES GLOBALES DEL TEMA
+// ==========================================================================
+// Este archivo contiene todas las variables de color, tipografía y espaciado
+// utilizadas en la aplicación. Modificar estos valores afectará a todo el sitio.
 
-//Colores de fondo
-$color-bg: #121016; //Fondo principal (oscuro)
-$color-panel: #1E1C23; // Fondo del panel
-$color-pie-pagina: #A24914; // Fondo del pie de página
+// --------------------------------------------------------------------------
+// 1. COLORES DE TEXTO
+// --------------------------------------------------------------------------
+$color-texto: #FFFFFF; // Texto principal (blanco puro para alto contraste sobre fondo oscuro)
+$color-texto-secundario: #B6B6B6; // Texto secundario (gris claro para subtítulos, metadatos e iconos inactivos)
+$color-texto-footer: #000000; // Texto del pie de página (negro para contraste sobre fondo naranja oscuro)
 
-//Colores de acento y interacciones
-$color-acento: #FF6B00; // Color de acento principal (botones, enlaces)
-$color-acento-light: #FF8C33; // Color de acento secundario (hover, active)
-$color-borde: #FF6B00; // Color de borde
+// --------------------------------------------------------------------------
+// 2. COLORES DE FONDO
+// --------------------------------------------------------------------------
+$color-bg: #121016; // Fondo principal de la página (casi negro, tono berenjena muy oscuro)
+$color-panel: #1E1C23; // Fondo para paneles, tarjetas y secciones destacadas (ligeramente más claro que el fondo)
+$color-pie-pagina: #A24914; // Fondo del pie de página (tono tierra/naranja quemado)
 
-//Colores de componentes específicos (Barras de progreso y descarga)
-$color-slider: #FF6B00; // Barra de progreso de audios
-$color-slider-bg: #2C2C34; // Fondo de la barra de progreso
-$color-descarga: #4ECD00; // Barra de descarga en progreso
-$color-bar: #D9D9D9; // Fondo de la barra de descarga
+// --------------------------------------------------------------------------
+// 3. COLORES DE ACENTO E INTERACCIÓN
+// --------------------------------------------------------------------------
+$color-acento: #FF6B00; // Color principal de marca (Naranja vibrante). Usado en botones, enlaces y bordes activos.
+$color-acento-light: #FF8C33; // Variación más clara del acento. Usado para estados 'hover' (al pasar el mouse).
+$color-borde: #FF6B00; // Color para bordes destacados (coincide con el acento).
 
-//Tipografía
-$font-main: 'Roboto', sans-serif; // Fuente principal de la interfaz [cite: 4]
+// --------------------------------------------------------------------------
+// 4. COLORES DE COMPONENTES ESPECÍFICOS
+// --------------------------------------------------------------------------
+// Variables para reproductores de audio y barras de progreso
+$color-slider: #FF6B00; // Color de la parte activa del slider (progreso de reproducción)
+$color-slider-bg: #2C2C34; // Color de fondo del slider (parte no reproducida)
+$color-descarga: #4ECD00; // Color verde para indicar descarga o éxito
+$color-bar: #D9D9D9; // Color neutro para barras secundarias
 
-// Espaciado y Sombra
-$spacing-unit: 1rem; // o el valor que uses (8px, 10px, etc.)
-$shadow-elevation-1: 0 4px 8px rgba(0, 0, 0, 0.4); // Sombra ligera para tarjetas y modales
+// --------------------------------------------------------------------------
+// 5. TIPOGRAFÍA
+// --------------------------------------------------------------------------
+$font-main: 'Roboto', sans-serif; // Fuente principal para todo el sitio. Asegura legibilidad en todas las pantallas.
+
+// --------------------------------------------------------------------------
+// 6. ESPACIADO Y SOMBRAS
+// --------------------------------------------------------------------------
+$spacing-unit: 1rem; // Unidad base de espaciado (16px por defecto)
+$shadow-elevation-1: 0 4px 8px #00000066; // Sombra suave para dar profundidad a tarjetas y modales
+
+// --------------------------------------------------------------------------
+// 7. BREAKPOINTS (PUNTOS DE RUPTURA RESPONSIVE)
+// --------------------------------------------------------------------------
+// Definición de anchos de pantalla para diseño adaptativo
+$breakpoint-sm: 576px; // Móviles grandes en horizontal
+$breakpoint-md: 768px; // Tablets
+$breakpoint-lg: 992px; // Laptops y pantallas de escritorio pequeñas
+$breakpoint-xl: 1200px; // Monitores de escritorio grandes

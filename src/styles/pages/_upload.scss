@@ -1,0 +1,155 @@
+// src/styles/pages/_upload.scss
+@use '../variables' as *;
+@use '../mixins' as *;
+
+// ==========================================================================
+// PÁGINA: SUBIDA DE ARCHIVOS (UPLOAD)
+// ==========================================================================
+
+.pagina-subida {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+
+    .tarjeta-subida {
+        width: 100%;
+        max-width: 900px;
+        border: 2px solid $color-acento;
+        border-radius: 30px;
+        padding: 40px;
+        background-color: transparent;
+
+        .contenido-subida {
+            display: flex;
+            gap: 40px;
+
+            @include responder-a(md) {
+                flex-direction: column-reverse;
+                align-items: center;
+            }
+
+            .columna-izquierda {
+                flex: 1;
+                width: 100%;
+
+                .formulario-subida {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+
+                    .grupo-formulario {
+                        width: 100%;
+
+                        .control-formulario {
+                            width: 100%;
+                            background-color: transparent;
+                            border: 2px solid $color-acento;
+                            border-radius: 15px;
+                            padding: 12px 20px;
+                            color: $color-texto;
+                            font-size: 1rem;
+                            outline: none;
+
+                            &::placeholder {
+                                color: $color-texto-secundario;
+                            }
+
+                            &:focus {
+                                box-shadow: 0 0 5px rgba($color-acento, 0.5);
+                            }
+                        }
+                    }
+
+                    .acciones-subida {
+                        display: flex;
+                        justify-content: center;
+                        margin-top: 20px;
+
+                        .boton-confirmar {
+                            background-color: $color-acento;
+                            color: #fff;
+                            border: none;
+                            border-radius: 25px;
+                            padding: 10px 40px;
+                            font-size: 1.2rem;
+                            cursor: pointer;
+                            transition: background 0.3s;
+
+                            &:hover {
+                                background-color: $color-acento-light;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .columna-derecha {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 40px;
+                padding-top: 20px;
+
+                .circulo-perfil {
+                    width: 150px;
+                    height: 150px;
+                    background-color: $color-acento;
+                    border-radius: 50%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    color: #fff;
+                    font-size: 1.2rem;
+                    text-align: center;
+                    line-height: 1.2;
+
+                    span {
+                        display: block;
+                    }
+                }
+
+                .zona-carga {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 15px;
+                    width: 100%;
+
+                    .flecha-subida {
+                        font-size: 4rem;
+                        color: $color-acento;
+                        // Add an underline bar below the arrow as in mockup?
+                        // Mockup shows arrow pointing up, and a bar below it.
+                        // Wait, the arrow is ON TOP of a bar?
+                        // Or just an arrow icon.
+                        // I'll use a standard arrow icon for now.
+                        // Mockup shows a thick arrow pointing up, and a thick horizontal line below it.
+                        // Like an "upload" symbol but separated.
+                    }
+
+                    .barra-carga {
+                        width: 200px;
+                        height: 10px;
+                        background-color: #D9D9D9; // Grey background
+                        border-radius: 5px;
+                        overflow: hidden;
+
+                        .progreso {
+                            width: 29%; // Mockup says 29%
+                            height: 100%;
+                            background-color: #4ECD00; // Green progress
+                        }
+                    }
+
+                    .porcentaje {
+                        color: $color-texto;
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+        }
+    }
+}

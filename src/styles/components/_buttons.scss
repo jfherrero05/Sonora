@@ -1,0 +1,81 @@
+// src/styles/components/_buttons.scss
+@use '../variables' as *;
+
+// ==========================================================================
+// COMPONENTE: BOTONES
+// ==========================================================================
+
+// Estilo base para todos los botones
+.boton {
+    display: inline-block;
+    font-family: $font-main;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    border: none;
+    font-size: 1rem;
+
+    // Estado deshabilitado
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+// --------------------------------------------------------------------------
+// Variantes de Botones
+// --------------------------------------------------------------------------
+
+// Botón Delineado (Usado en Navbar y Buscador)
+.boton-delineado {
+    border: 2px solid $color-acento;
+    color: $color-texto;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    &:hover {
+        background-color: $color-acento;
+        color: $color-bg; // Texto oscuro sobre fondo naranja para contraste
+        box-shadow: 0 0 10px rgba($color-acento, 0.4);
+    }
+}
+
+// Botones de Categorías (Pequeños, estilo etiqueta)
+.boton-categoria {
+    border: 1px solid $color-texto-secundario;
+    color: $color-texto-secundario;
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    margin: 0 5px 10px 0;
+    background: transparent;
+
+    &:hover,
+    &.activo {
+        // '.active' cambiado a '.activo'
+        border-color: $color-acento;
+        color: $color-acento;
+        background-color: rgba($color-acento, 0.1);
+    }
+}
+
+// Botón Primario Sólido (Usado en Login/Registro/Confirmar)
+.boton-primario {
+    background-color: $color-acento;
+    color: #000; // Negro para máximo contraste con el naranja fuerte
+    font-weight: bold;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    width: 100%;
+    text-transform: uppercase;
+
+    &:hover {
+        background-color: $color-acento-light;
+        transform: translateY(-2px); // Efecto de elevación sutil
+    }
+}

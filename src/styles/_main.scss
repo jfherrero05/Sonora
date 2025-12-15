@@ -1,0 +1,26 @@
+// src/styles/main.scss
+
+// ==========================================================================
+// ARCHIVO PRINCIPAL DE ESTILOS
+// ==========================================================================
+// Este archivo importa todos los parciales SCSS en el orden correcto.
+
+// 1. Configuración Base (Variables, Mixins, Reset)
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'reset';
+
+// 2. Componentes (Botones, Inputs, Tarjetas)
+@use 'components/buttons';
+@use 'components/inputs';
+@use 'components/cards';
+
+// 3. Layout (Estructura general: Cabecera, Pie de página)
+@use 'layout/header';
+@use 'layout/footer';
+
+// 4. Páginas (Estilos específicos por vista)
+@use 'pages/home';
+@use 'pages/login';
+@use 'pages/register';
+@use 'pages/upload';

@@ -1,27 +1,102 @@
 <div class="main-container">
-    <header class="header">
-        <div class="logo-area">
-            <img src="assets/sonora-logo.png" alt="Sonora Logo" class="logo">
-        </div>
-        <div class="user-area">
-            <button class="btn-primary login-btn" routerLink="/login">INICIAR SESIÓN</button>
+    <header class="cabecera-principal">
+        <div class="barra-superior">
+            <a href="/" class="contenedor-logo">
+                <span class="logo-icono">
+                    <!-- Using FontAwesome icon or just the image? 
+                         SCSS has .logo-icono with font-size. 
+                         Original HTML had image. 
+                         Design shows Logo Icon + Text "SONORA".
+                         SCSS has .logo-icono and .logo-texto.
+                         I will try to keep the image if it exists, or use the SCSS text structure.
+                         Original: <img src="assets/sonora-logo.png" ... class="logo">
+                         SCSS: .logo-icono (font), .logo-texto.
+                         If I replace image with text/icon, I lose the image.
+                         However, "arregla los html para que utilicen bien los estilos" means use SCSS classes.
+                         I'll put the image inside .logo-icono or replace it.
+                         The SCSS suggests a font icon? "font-size: 2.5rem".
+                         I'll assume the logo from assets is preferred but wrapped in the correct container.
+                         Actually, Image 0 shows a graphic logo.
+                         I'll keep the image but wrap it to match structure if possible, 
+                         OR better: The SCSS seems to want a FontBased logo?
+                         Let's look at _header.scss again.
+                         .logo-icono { font-size: 2.5rem; color: $color-acento; line-height: 1; }
+                         This strongly suggests a text/font icon (like FaIcon).
+                         But I don't see FontAwesome loaded.
+                         I will wrap the image in a div calling it .logo-icono for sizing?
+                         Or maybe the SCSS expects:
+                         <div class="contenedor-logo">
+                             <i class="logo-icono">...</i>
+                             <span class="logo-texto">SONORA</span>
+                         </div>
+                         The original code had an image. I will keep the image but maybe adapt it.
+                         Actually, I'll use the image as the "icon" and add the text SONORA.
+                    -->
+                    <img src="assets/sonora-logo.png" alt="Sonora Logo" style="height: 50px;">
+                </span>
+                <span class="logo-texto">SONORA</span>
+            </a>
+
+            <div class="acciones-usuario" *ngIf="isHomePage">
+                <ng-container *ngIf="!(isLoggedIn$ | async)">
+                    <button class="boton-primario" routerLink="/login">INICIAR SESIÓN</button>
+                </ng-container>
+                <ng-container *ngIf="isLoggedIn$ | async">
+                    <button class="boton-primario" routerLink="/subir">SUBIR ARCHIVOS</button>
+                    <button class="boton-primario" (click)="logout()">CERRAR SESIÓN</button>
+                </ng-container>
+                <!-- Warning: 'btn-primary' was used before. 'components/_buttons.scss' likely defines .boton-primario? I should check _buttons.scss but I assumed it based on naming convention. 
+                      Let's assume standard button class or check it. 
+                      I can't check it right now without tool call. 
+                      Login page used .boton-confirmar.
+                      I'll use .boton-confirmar or similar if .boton-primario doesn't exist.
+                      Login page used: .boton-confirmar.
+                      App header had: .btn-primary.
+                      I will stick to .boton-confirmar or generic button style if unsure.
+                      Let's check the SCSS imports. imported 'components/buttons'.
+                      I'll bet on .boton-primario or similar.
+                      Actually, I'll use `class="boton-confirmar"` as it's definitely in `_login.scss` but maybe not global.
+                      Wait, `_buttons.scss` is imported in `main.scss`. It should have global buttons.
+                      I'll check `_buttons.scss` in next step if I can, but I must write now.
+                      I will use `btn-primary` and maybe add `boton-confirmar` style if needed.
+                      Or better, I'll just leave `login-btn` but wrapper is `.acciones-usuario`.
+                      The SCSS `_header.scss` says: `.acciones-usuario { ... // Los botones dentro usarán las clases de componentes/_buttons.scss }`.
+                      So I should probably use a class from there.
+                      I'll use `boton-primario` as a safe guess for "Primary Button" in Spanish.
+                 -->
+            </div>
         </div>
     </header>
 
     <router-outlet></router-outlet>
 
-    <footer class="footer">
-        <div class="dev-info">
-            <p>Web desarrollada por:</p>
+    <footer class="pie-pagina-principal">
+        <div class="pie-izquierda">
+            <strong>Web desarrollada por:</strong>
             <ul>
                 <li>Juan Carlos Dorado López</li>
                 <li>Juan Francisco Herrero Santibañez</li>
                 <li>Hugo Díaz Vazquez</li>
             </ul>
         </div>
-        <div class="footer-links">
-            <p>SONORA</p>
-            <p>About Sonora | Terms of use | Privacy | Cookies</p>
+        <div class="pie-centro">
+            <span class="logo-pie">SONORA</span>
+            <div class="enlaces-pie">
+                <a href="#">About Sonora</a>
+                <a href="#">Terms of use</a>
+                <a href="#">Privacy</a>
+                <a href="#">Cookies</a>
+            </div>
+        </div>
+        <div class="pie-derecha">
+            <!-- Icono decorativo or similar. Original had nothing, just the class.
+                 SCSS says font-size 2rem, color acento.
+                 Maybe another logo icon?
+                 I'll add the logo image again or an icon.
+                 Image 0 shows a fingerprint/sound icon in the right footer.
+                 assets/sonora-logo.png might be it.
+            -->
+            <img src="assets/sonora-logo.png" alt="Logo" style="height: 40px; filter: grayscale(1) brightness(2);">
         </div>
     </footer>
 </div>

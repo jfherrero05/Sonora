@@ -1,1 +1,14 @@
-/* No CSS *//*# sourceMappingURL=subida-archivos.component.css.map */
+select.control-formulario {
+  background-color: transparent;
+  color: #fff;
+  padding-right: 2rem;
+}
+select.control-formulario option {
+  background-color: #333;
+  color: #fff;
+}
+
+.icono-subida {
+  font-size: 4rem;
+  color: #ff9800;
+}/*# sourceMappingURL=subida-archivos.component.css.map */

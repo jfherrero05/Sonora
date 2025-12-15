@@ -1,0 +1,58 @@
+// src/styles/layout/_header.scss
+@use "../variables" as *;
+
+// ==========================================================================
+// LAYOUT: CABECERA (HEADER)
+// ==========================================================================
+
+.cabecera-principal {
+  width: 100%;
+  padding: 20px 40px;
+
+  // ----------------------------------------------------------------------
+  // Barra Superior: Logo y Acciones de Usuario
+  // ----------------------------------------------------------------------
+  .barra-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    // Contenedor del Logo
+    .contenedor-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none; // Asegura que no tenga subrayado si es un enlace
+
+      .logo-icono {
+        // Renombrado de .logo-icon
+        font-size: 2.5rem; // Tamaño grande para el icono
+        color: $color-acento;
+        line-height: 1;
+      }
+
+      .logo-texto {
+        // Renombrado de .logo-text
+        font-size: 1.2rem;
+        color: $color-acento;
+        font-weight: bold;
+        letter-spacing: 3px; // Espaciado S O N O R A
+        text-transform: uppercase;
+      }
+    }
+
+    // Acciones de usuario (Login/Registro)
+    // Acciones de usuario (Login/Registro)
+    .acciones-usuario {
+      display: flex;
+      gap: 10px;
+
+      .boton-primario {
+        width: auto; // Sobrescribir el 100% del componente base
+        min-width: 180px; // Tamaño uniforme para todos
+        padding: 0.8rem 1rem; // Un poco menos de padding lateral si fijamos ancho
+      }
+    }
+  }
+}

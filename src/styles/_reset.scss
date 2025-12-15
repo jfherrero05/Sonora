@@ -1,0 +1,58 @@
+// src/styles/_reset.scss
+@use 'variables' as *;
+
+// ==========================================================================
+// RESET & ESTILOS BASE
+// ==========================================================================
+
+// Reinicio básico de box-model para todos los elementos
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+// Configuración global de HTML y Body
+html,
+body {
+    height: 100%;
+    font-family: $font-main;
+    background-color: $color-bg;
+    color: $color-texto;
+    line-height: 1.6; // Mejor legibilidad
+}
+
+// Estilos base para enlaces
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: $color-acento;
+    }
+}
+
+// Listas sin estilo por defecto
+ul {
+    list-style: none;
+}
+
+// Imágenes responsivas por defecto
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+// --------------------------------------------------------------------------
+// CLASES DE UTILIDAD GLOBAL
+// --------------------------------------------------------------------------
+
+// Contenedor principal para centrar contenido y limitar el ancho
+.contenedor {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}

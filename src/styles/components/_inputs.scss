@@ -1,0 +1,86 @@
+    // src/styles/components/_inputs.scss
+    @use '../variables' as *;
+
+    // ==========================================================================
+    // COMPONENTE: INPUTS Y FORMULARIOS
+    // ==========================================================================
+
+    // --------------------------------------------------------------------------
+    // 1. Buscador Principal (Estilo Redondo)
+    // --------------------------------------------------------------------------
+    .contenedor-busqueda {
+        display: flex;
+        justify-content: center;
+        margin: 2rem 0;
+        padding: 0 1rem;
+
+        .caja-busqueda {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+
+            input {
+                width: 100%;
+                background-color: transparent;
+                border: 2px solid $color-acento; // Borde naranja característico
+                border-radius: 50px;
+                padding: 12px 20px 12px 45px; // Padding izquierdo extra para el icono
+                color: $color-texto;
+                font-size: 1rem;
+                font-family: $font-main;
+                outline: none;
+
+                &::placeholder {
+                    color: $color-texto-secundario;
+                }
+
+                &:focus {
+                    box-shadow: 0 0 10px rgba($color-acento, 0.3);
+                }
+            }
+
+            .icono {
+                // Renombrado de .icon
+                position: absolute;
+                left: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: $color-texto;
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    // --------------------------------------------------------------------------
+    // 2. Inputs de Formularios (Estilo Cuadrado con borde sutil)
+    // --------------------------------------------------------------------------
+    .grupo-input-formulario {
+        margin-bottom: 1.5rem;
+        width: 100%;
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: $color-texto;
+            font-size: 0.9rem;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.05); // Fondo semitransparente
+            border: 1px solid $color-texto-secundario;
+            border-radius: 8px;
+            padding: 10px 15px;
+            color: $color-texto;
+            font-family: $font-main;
+            transition: 0.3s;
+            outline: none;
+
+            &:focus {
+                border-color: $color-acento;
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+    }
