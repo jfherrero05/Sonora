@@ -1,0 +1,146 @@
+// src/styles/pages/_register.scss
+@use '../mixins' as *;
+@use '../variables' as *;
+
+// ==========================================================================
+// PÁGINA: REGISTRO
+// ==========================================================================
+
+.pagina-registro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+
+    .tarjeta-registro {
+        width: 100%;
+        max-width: 900px;
+        border: 2px solid $color-acento;
+        border-radius: 30px;
+        padding: 40px;
+        background-color: transparent;
+
+        .contenido-registro {
+            display: flex;
+            gap: 40px;
+
+            @include responder-a(md) {
+                flex-direction: column-reverse;
+                align-items: center;
+            }
+
+            .columna-izquierda {
+                flex: 1;
+                width: 100%;
+
+                .formulario-registro {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 15px;
+
+                    .grupo-formulario {
+                        width: 100%;
+
+                        .control-formulario {
+                            width: 100%;
+                            background-color: transparent;
+                            border: 2px solid $color-acento; // Borde naranja
+                            border-radius: 15px; // Bordes redondeados
+                            padding: 12px 20px;
+                            color: $color-texto;
+                            font-size: 1rem;
+                            outline: none;
+
+                            &::placeholder {
+                                color: $color-texto-secundario;
+                            }
+
+                            &:focus {
+                                box-shadow: 0 0 5px rgba($color-acento, 0.5);
+                            }
+                        }
+                    }
+
+                    .acciones-registro {
+                        display: flex;
+                        justify-content: center;
+                        margin-top: 20px;
+
+                        .boton-confirmar {
+                            background-color: $color-acento;
+                            color: #fff;
+                            border: none;
+                            border-radius: 25px;
+                            padding: 10px 40px;
+                            font-size: 1.2rem;
+                            text-transform: lowercase; // "confirmar" en minúsculas en mockup? No, parece normal.
+                            // En mockup dice "confirmar" todo en minúsculas o Capitalize?
+                            // Image 0: "confirmar"
+                            cursor: pointer;
+                            transition: background 0.3s;
+
+                            &:hover {
+                                background-color: $color-acento-light;
+                            }
+                        }
+                    }
+
+                    .enlaces-extra {
+                        display: flex;
+                        justify-content: center;
+                        gap: 10px;
+                        margin-top: 10px;
+                        font-size: 0.8rem;
+                        color: #000; // Texto negro sobre fondo oscuro? No, fondo es oscuro.
+                        // En mockup Image 0, el texto "About Freesound..." se ve oscuro, casi negro.
+                        // Pero el fondo es negro.
+                        // Quizás es gris oscuro.
+
+                        a {
+                            color: #000; // Mockup shows black text inside the card?
+                            // Wait, the card background is transparent (dark).
+                            // If text is black, it won't be visible.
+                            // Let's look at Image 0 again.
+                            // The text "About Freesound..." is barely visible, dark color.
+                            // Maybe it's intended to be subtle.
+                            // I'll use a dark grey.
+                            color: #333;
+                            text-decoration: none;
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .columna-derecha {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                padding-top: 20px;
+
+                .circulo-perfil {
+                    width: 150px;
+                    height: 150px;
+                    background-color: $color-acento;
+                    border-radius: 50%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    color: #fff;
+                    font-size: 1.2rem;
+                    text-align: center;
+                    line-height: 1.2;
+
+                    span {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}

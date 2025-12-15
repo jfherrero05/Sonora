@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "",
-    "sources": [
-        "subida-archivos.component.scss"
-    ],
-    "names": [],
-    "file": "subida-archivos.component.css"
-}
+{"version":3,"sources":["subida-archivos.component.scss","subida-archivos.component.css"],"names":[],"mappings":"AACA;EACE,6BAAA;EACA,WAAA;EACA,mBAAA;ACAF;ADEE;EACE,sBAAA;EACA,WAAA;ACAJ;;ADKA;EACE,eAAA;EACA,cAAA;ACFF","file":"subida-archivos.component.css"}

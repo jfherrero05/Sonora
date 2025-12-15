@@ -1,0 +1,124 @@
+// src/styles/pages/_login.scss
+@use '../variables' as *;
+@use '../mixins' as *;
+
+// ==========================================================================
+// PÁGINA: INICIO DE SESIÓN (LOGIN)
+// ==========================================================================
+
+.pagina-autenticacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+
+    .tarjeta-autenticacion {
+        border: 2px solid $color-acento;
+        border-radius: 30px;
+        padding: 60px 40px;
+        width: 100%;
+        max-width: 600px;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto;
+
+        .contenido-autenticacion {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+
+            .circulo-perfil-login {
+                width: 150px;
+                height: 150px;
+                background-color: $color-acento;
+                border-radius: 50%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+                font-size: 1.2rem;
+                text-align: center;
+                line-height: 1.2;
+                margin-bottom: 20px;
+
+                span {
+                    display: block;
+                }
+            }
+
+            .formulario-autenticacion {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+                .grupo-formulario {
+                    width: 100%;
+
+                    .control-formulario {
+                        width: 100%;
+                        background: transparent;
+                        border: 2px solid $color-acento;
+                        color: $color-texto;
+                        padding: 12px 20px;
+                        border-radius: 15px;
+                        outline: none;
+                        font-size: 1rem;
+
+                        &::placeholder {
+                            color: $color-texto-secundario;
+                        }
+
+                        &:focus {
+                            box-shadow: 0 0 5px rgba($color-acento, 0.5);
+                        }
+                    }
+                }
+
+                .acciones-autenticacion {
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 10px;
+
+                    .boton-confirmar {
+                        background-color: $color-acento;
+                        color: #fff;
+                        border: none;
+                        border-radius: 25px;
+                        padding: 10px 40px;
+                        font-size: 1.2rem;
+                        cursor: pointer;
+                        transition: background 0.3s;
+
+                        &:hover {
+                            background-color: $color-acento-light;
+                        }
+                    }
+                }
+            }
+
+            .enlaces-autenticacion {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 20px;
+                font-size: 0.8rem;
+
+                a {
+                    color: #333;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}
