@@ -1,18 +1,17 @@
-// Asegurar que el desplegable coincida con el tema oscuro
+// Aseguro que el select tenga el mismo estilo que los inputs, adaptándome al fondo oscuro.
 select.control-formulario {
   background-color: transparent;
-  color: #fff; // O el color de texto global
-  padding-right: 2rem; // Espacio para la flecha
+  color: #fff;
+  padding-right: 2rem;
 
   option {
-    background-color: #333; // Fondo oscuro para opciones
+    background-color: #333;
     color: #fff;
   }
 }
 
-// Estilo del Icono de Subida
+// Estilo del icono gigante de subida
 .icono-subida {
-  font-size: 4rem; // Ajustar tamaño según necesidad
-  color: #ff9800; // Color naranja (Material Orange 500 o acento similar)
-  // Si se desea un naranja específico, usaré uno estándar o var(--color-acento).
+  font-size: 4rem;
+  color: #ff9800; // Color de acento naranja para destacar la acción
 }

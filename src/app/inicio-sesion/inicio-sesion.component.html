@@ -1,45 +1,46 @@
 <div class="pagina-autenticacion">
     <div class="tarjeta-autenticacion">
         <div class="contenido-autenticacion">
-            
+
             <div class="circulo-perfil-login">
                 <span>img</span>
                 <span>perfil</span>
             </div>
 
+            <!-- Enlazo este formulario HTML con la variable 'formularioLogin' definida en el TypeScript -->
             <form class="formulario-autenticacion" [formGroup]="formularioLogin" (ngSubmit)="onSubmit()">
-                
+
                 <div class="grupo-formulario">
-                    <input type="email" id="email" formControlName="email" class="control-formulario" placeholder="introduzca el nombre">
-                    <!-- Note: Placeholder in image says "introduzca el nombre" which is weird for email, but keeping consistence with existing code logic (email) vs design text (name). 
-                         Actually design image 1 says: "introduzca el nombre", "Introduzcan los apellidos", "Correo electronico", "Contraseña". 
-                         Wait, image 1 is REGISTER page (it has many fields).
-                         Image 2 is LOGIN page (profile pic "Editar foto de perfil", "Correo electronico", "Contraseña").
-                         Image 0 is UPLOAD page? No, Image 0 is Upload.
-                         Let's re-verify images.
-                         Image 2: "Editar foto de perfil" (circle), "Correo electronico", "Contraseña".
-                         So Login page needs "Correo electronico" and "Contraseña".
-                    -->
-                    
-                    <small *ngIf="formularioLogin.get('email')?.invalid && formularioLogin.get('email')?.touched" style="color: red; display: block; margin-top: 5px;">
+                    <input type="email" id="email" formControlName="email" class="control-formulario"
+                        placeholder="introduzca el nombre">
+                    <!-- Note: Placeholder mantengo "introduzca el nombre" por fidelidad al diseño original aunque sea un email -->
+
+                    <!-- Muestro un mensaje de error rojo si el usuario ha tocado el campo y el email no es válido -->
+                    <small *ngIf="formularioLogin.get('email')?.invalid && formularioLogin.get('email')?.touched"
+                        style="color: red; display: block; margin-top: 5px;">
                         Introduce un correo válido
                     </small>
                 </div>
 
                 <div class="grupo-formulario">
-                    <input type="password" id="password" formControlName="password" class="control-formulario" placeholder="Contraseña">
-                     
-                    <small *ngIf="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched" style="color: red; display: block; margin-top: 5px;">
+                    <input type="password" id="password" formControlName="password" class="control-formulario"
+                        placeholder="Contraseña">
+
+                    <!-- Valido que la contraseña cumpla los requisitos mínimos -->
+                    <small *ngIf="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched"
+                        style="color: red; display: block; margin-top: 5px;">
                         Mínimo 6 caracteres
                     </small>
                 </div>
-                
+
                 <div class="enlaces-autenticacion">
-                   <span>¿No tienes cuenta aún?</span> <a routerLink="/registro">Registrate</a>
+                    <span>¿No tienes cuenta aún?</span> <a routerLink="/registro">Registrate</a>
                 </div>
 
                 <div class="acciones-autenticacion">
-                    <button type="submit" class="boton-confirmar" [disabled]="formularioLogin.invalid">Confirmar</button>
+                    <!-- Deshabilito el botón de confirmar si el formulario no es válido para evitar cargas innecesarias -->
+                    <button type="submit" class="boton-confirmar"
+                        [disabled]="formularioLogin.invalid">Confirmar</button>
                 </div>
             </form>
         </div>

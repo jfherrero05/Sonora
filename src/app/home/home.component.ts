@@ -10,13 +10,15 @@ import { Sound } from '../interfaces/sound.interface';
 export class HomeComponent implements OnInit, OnDestroy {
   listaSonidos: Sound[] = [];
 
-  // Variables para el reproductor de audio
+  // Aquí almaceno la referencia al elemento de audio HTML5 para poder controlarlo (play, pausa, volumen).
   audioActual: HTMLAudioElement | null = null;
-  sonidoActualIndice: number = -1; // -1 indica que no hay sonido seleccionado
+  // Indico qué sonido de la lista está sonando actualmente (-1 significa ninguno).
+  sonidoActualIndice: number = -1;
   estaReproduciendo: boolean = false;
-  progresoActual: number = 0; // 0 a 100 para el slider
+  // Este valor (0-100) lo uso para mover la barra de progreso visualmente.
+  progresoActual: number = 0;
 
-  // Listas para los carruseles (Mock Data)
+  // Estas listas separadas me sirven para organizar los sonidos en los distintos carruseles de la portada.
   sonidosNaturaleza: Sound[] = [];
   sonidosInstrumentos: Sound[] = [];
   sonidosExtranos: Sound[] = [];
@@ -24,10 +26,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private soundService: SoundService) {}
 
   ngOnInit() {
+    // Al cargar el componente, pido todos los sonidos disponibles al servicio.
     this.soundService.getAllSounds().subscribe((datos: Sound[]) => {
       this.listaSonidos = datos;
 
-      // Duplicar datos para simular carruseles llenos (Mock)
+      // Como la base de datos puede tener pocos datos al principio, genero datos duplicados
+      // para rellenar visualmente los carruseles y que la web se vea completa.
       this.sonidosNaturaleza = this.generarMockSounds(datos, 'Naturaleza', 6);
       this.sonidosInstrumentos = this.generarMockSounds(
         datos,
@@ -36,7 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       );
       this.sonidosExtranos = this.generarMockSounds(datos, 'Extraño', 6);
 
-      // Asegurar que la lista principal también tenga suficientes items para el demo
+      // Si la lista principal es muy corta, también la relleno artificialmente para las pruebas del diseño.
       if (this.listaSonidos.length > 0 && this.listaSonidos.length < 6) {
         const original = [...this.listaSonidos];
         while (this.listaSonidos.length < 6) {
@@ -46,27 +50,26 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  // Helper para generar mocks basados en los sonidos existentes o placeholders
+  // Esta función auxiliar me ayuda a crear datos de relleno si no tengo suficientes sonidos reales.
   private generarMockSounds(
     base: Sound[],
     prefix: string,
     count: number
   ): Sound[] {
     let resultado: Sound[] = [];
-    // Usar sonidos base si existen, sino crear ficticios
+    // Si tengo sonidos base, los clono cambiando el título.
     if (base.length > 0) {
       for (let i = 0; i < count; i++) {
-        // Ciclar sobre los sonidos base
         const sound = { ...base[i % base.length] };
-        sound.titulo = `${prefix} ${i + 1}`; // Differentiate titles
+        sound.titulo = `${prefix} ${i + 1}`;
         resultado.push(sound);
       }
     } else {
-      // Fallback si no hay datos del servicio
+      // Si no tengo nada, creo objetos vacíos para que no se rompa la interfaz.
       for (let i = 0; i < count; i++) {
         resultado.push({
           titulo: `${prefix} ${i + 1}`,
-          audioUrl: '', // No playable
+          audioUrl: '',
           imgUrl: '',
           _id: `mock-${prefix}-${i}`,
           id: i + 1000,
@@ -78,15 +81,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     return resultado;
   }
 
+  // Controlo el movimiento horizontal de los carruseles cuando el usuario pulsa las flechas.
   moverCarrusel(direccion: 'izquierda' | 'derecha', contenedor: HTMLElement) {
-    const scrollAmount = contenedor.clientWidth; // Mover una pantalla completa o ancho del contenedor
+    const scrollAmount = contenedor.clientWidth;
     const currentScroll = contenedor.scrollLeft;
     const maxScroll = contenedor.scrollWidth - contenedor.clientWidth;
 
     if (direccion === 'derecha') {
       if (currentScroll + 10 >= maxScroll) {
-        // Tolerancia pequeña
-        // Volver al inicio (Loop)
+        // Si llego al final, vuelvo al principio suavemente (efecto loop).
         contenedor.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
         contenedor.scrollTo({
@@ -95,9 +98,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         });
       }
     } else {
-      // Izquierda
+      // Movimiento hacia la izquierda.
       if (currentScroll <= 0) {
-        // Ir al final (Loop)
+        // Si estoy al principio, salto al final.
         contenedor.scrollTo({ left: maxScroll, behavior: 'smooth' });
       } else {
         contenedor.scrollTo({
@@ -108,43 +111,43 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Cuando el componente se destruye (ej. cambio de página), me aseguro de parar el audio.
   ngOnDestroy() {
     this.detenerAudio();
   }
 
+  // Lógica principal para el botón de Play/Pausa de cada tarjeta.
   toggleReproduccion(sonido: Sound, index: number) {
     if (this.sonidoActualIndice === index) {
-      // Si es el mismo sonido, alternar play/pause
+      // Si el usuario clica en el mismo sonido que ya suena, alterno entre pausa y reanudar.
       if (this.estaReproduciendo) {
         this.pausarAudio();
       } else {
         this.reanudarAudio();
       }
     } else {
-      // Es un sonido nuevo
+      // Si clica en otro diferente, cargo y reproduzco ese nuevo sonido.
       this.reproducirNuevoSonido(sonido, index);
     }
   }
 
   private reproducirNuevoSonido(sonido: Sound, index: number) {
-    this.detenerAudio(); // Detener el anterior si existe
+    this.detenerAudio(); // Paro lo que sea que estuviera sonando antes.
 
     this.audioActual = new Audio(sonido.audioUrl);
     this.audioActual.load();
     this.sonidoActualIndice = index;
 
-    // Suscribirse a eventos del audio
+    // Actualizo la barra de progreso conforme avanza el audio.
     this.audioActual.ontimeupdate = () => {
       this.actualizarProgreso();
     };
 
+    // Cuando termina el audio, reseteo el estado visual pero mantengo el índice por si quieren darle a replay.
     this.audioActual.onended = () => {
       this.estaReproduciendo = false;
       this.progresoActual = 0;
-      this.sonidoActualIndice = -1; // Resetear o mantener seleccionado pero en pausa
-      // Mejor mantener el índice para que el usuario pueda volver a dar play
       this.sonidoActualIndice = index;
-      // Pero si terminó, el icono debería ser Play de nuevo
       this.estaReproduciendo = false;
     };
 
@@ -172,14 +175,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Función para el botón de Stop (cuadrado).
   stopSonido(sonido: Sound, index: number) {
     if (this.sonidoActualIndice === index) {
       this.detenerAudio();
-      // Asegurar que el slider vuelva a 0 en la vista si es necesario,
-      // aunque detenerAudio ya resetea progresoActual.
     }
   }
 
+  // Función para reiniciar el audio desde el principio (botón Replay).
   replaySonido(sonido: Sound, index: number) {
     if (this.sonidoActualIndice === index && this.audioActual) {
       this.audioActual.currentTime = 0;
@@ -187,24 +190,23 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.reanudarAudio();
       }
     } else {
-      // Si no estaba sonando, empezar de nuevo
+      // Si no estaba sonando, lo inicio desde cero.
       this.reproducirNuevoSonido(sonido, index);
     }
   }
 
+  // Limpieza completa del objeto de audio.
   private detenerAudio() {
     if (this.audioActual) {
       this.audioActual.pause();
-      this.audioActual = null; // Limpiar referencia
+      this.audioActual = null;
       this.estaReproduciendo = false;
       this.progresoActual = 0;
-      // No reseteamos sonidoActualIndice para que el usuario vea cuál estaba tocando,
-      // pero si el usuario quiere "Stop" completo, quizás resetear índice es mejor.
-      // Para "Stop" visual, resetear índice parece correcto.
       this.sonidoActualIndice = -1;
     }
   }
 
+  // Calculo el porcentaje de reproducción para mover el slider.
   private actualizarProgreso() {
     if (this.audioActual && this.audioActual.duration) {
       this.progresoActual =
@@ -212,6 +214,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
+  // Permito al usuario saltar a una parte específica del audio moviendo el slider.
   buscarPosicion(evento: any) {
     const valor = evento.target.value;
     if (this.audioActual && this.audioActual.duration) {

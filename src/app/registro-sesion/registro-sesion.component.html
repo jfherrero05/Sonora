@@ -8,6 +8,7 @@
                     <div class="grupo-formulario">
                         <input type="text" formControlName="nombre" placeholder="introduzca el nombre"
                             class="control-formulario">
+                        <!-- Muestro error si el nombre está vacío -->
                         <small
                             *ngIf="formularioRegistro.get('nombre')?.invalid && formularioRegistro.get('nombre')?.touched"
                             style="color: red; font-size: 0.8em; display: block; margin-top: 5px;">
@@ -34,7 +35,6 @@
                         <input type="password" formControlName="password" placeholder="Contraseña"
                             class="control-formulario">
                     </div>
-                    <!-- Password hint moved or removed? Design doesn't clearly show it but good to keep inside form logic if needed, but SCSS doesn't have specific class for it. I'll keep it simple or remove if breaks layout. SCSS has gap 15px. -->
 
                     <div class="grupo-formulario">
                         <input type="password" formControlName="confirmPassword" placeholder="Repita contraseña"
@@ -44,14 +44,6 @@
                     <div class="grupo-formulario">
                         <input type="text" formControlName="pais" placeholder="Pais" class="control-formulario">
                     </div>
-
-                    <!-- "About Freesound Terms of use Privacy Cookies" link row from design image 1? 
-                          Image 1 shows these links BETWEEN Contraseña and Repita contraseña? No, it looks like a footer valid on that page or just texts. 
-                          Wait, existing HTML had "empty-input" for city.
-                          Design Image 1 has: Nombre, Apellidos, Correo, Password, (Links?), Repita Password, Pais, (Empty bar).
-                          The empty bar might be City or just an empty input as per previous HTML.
-                     -->
-
 
                     <div class="acciones-registro">
                         <button type="submit" class="boton-confirmar"

@@ -1,10 +1,9 @@
+// Defino la estructura de datos que tendrá un usuario en mi aplicación.
 export interface User {
   nombre: string;
   apellidos: string;
   email: string;
-  password?: string; // Optional for when we just want profile info safe? Or explicit
+  // La contraseña es opcional aquí porque a veces manejo datos de usuario sin incluir su clave (por seguridad).
+  password?: string;
   pais: string;
-  // ciudad removed
 }
-
-// Simple interface for now.

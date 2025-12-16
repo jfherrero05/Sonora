@@ -1,5 +1,5 @@
 <div class="pagina-inicio">
-    <!-- 1. Buscador y Título -->
+    <!-- Contenedor principal del buscador con el título de bienvenida -->
     <div class="contenedor-busqueda-principal">
         <div class="barra-busqueda">
             <span class="material-icons-outlined icono-lupa">search</span>
@@ -9,7 +9,8 @@
             Encuentre todo tipo de sonidos
         </div>
     </div>
-    <!-- 2. Sección "Qué es Sonora" -->
+
+    <!-- Sección narrativa donde explico qué es el proyecto -->
     <div class="seccion-info">
         <div class="caja-info">
             <h2>Que es sonora</h2>
@@ -20,7 +21,8 @@
                 web de plugins.</p>
         </div>
     </div>
-    <!-- 3. Categorías -->
+
+    <!-- Filtros por categoría para facilitar la navegación -->
     <div class="seccion-categorias">
         <h2 class="titulo-seccion">categorías</h2>
         <div class="grid-categorias">
@@ -36,9 +38,11 @@
             <button class="boton-categoria">Motos</button>
         </div>
     </div>
-    <!-- 4. Secciones Tops Download (Carruseles) -->
+
+    <!-- Sección de Carruseles: Aquí muestro los sonidos destacados y por categorías -->
     <div class="seccion-tops">
         <h2 class="titulo-principal-tops">tops download</h2>
+
         <!-- Carrusel 1: Sonidos Populares -->
         <div class="grupo-carrusel">
             <span class="titulo-pill">sonidos populares</span>
@@ -48,7 +52,7 @@
                 </button>
                 <div class="ventana-carrusel" #carruselPopulares>
                     <div class="pista-carrusel">
-                        <!-- Card for each sound -->
+                        <!-- Genero una tarjeta por cada sonido en la lista de populares -->
                         <div class="tarjeta-sonido" *ngFor="let sonido of listaSonidos; let i = index">
                             <div class="controles-reproductor">
                                 <input type="range" class="slider-progreso"
@@ -73,7 +77,8 @@
                                 <p>{{ sonido.titulo }}</p>
                             </div>
                         </div>
-                        <!-- Placeholder cards if empty or for layout demo -->
+
+                        <!-- Muestro tarjetas vacías de 'Cargando' si aún no han llegado los datos de la API -->
                         <div class="tarjeta-sonido" *ngIf="listaSonidos.length === 0">
                             <div class="controles-reproductor">
                                 <input type="range" class="slider-progreso" value="0" disabled>
@@ -99,6 +104,7 @@
                 </button>
             </div>
         </div>
+
         <!-- Carrusel 2: Sonidos de Naturaleza -->
         <div class="grupo-carrusel">
             <span class="titulo-pill">sonidos de naturaleza</span>
@@ -139,6 +145,7 @@
                 </button>
             </div>
         </div>
+
         <!-- Carrusel 3: Sonidos de Instrumentos -->
         <div class="grupo-carrusel">
             <span class="titulo-pill">sonidos de instrumentos</span>
@@ -179,6 +186,7 @@
                 </button>
             </div>
         </div>
+
         <!-- Carrusel 4: Sonidos Extraños -->
         <div class="grupo-carrusel">
             <span class="titulo-pill">sonidos extraños</span>
