@@ -11,36 +11,32 @@ import { AuthService } from '../service/auth.service';
 export class InicioSesionComponent {
   formularioLogin: FormGroup;
 
+  // Inyecto FormBuilder para crear formularios, el servicio de Auth para conectar con la API,
+  // y Router para navegar tras el login.
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
   ) {
+    // Creamos el formulario con validaciones
     this.formularioLogin = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
+  // Esto se ejecuta al pulsar el botón
   onSubmit() {
     if (this.formularioLogin.valid) {
-      // Llamamos al servicio pasando { email, password }
-      this.authService.login(this.formularioLogin.value).subscribe({
-        next: (res) => {
-          console.log('Login exitoso:', res);
-          this.router.navigate(['/']); // Redirigir a Inicio
-        },
-        error: (err) => {
-          // Si el servidor devuelve 401 (Unauthorized), caerá aquí
-          console.error('Error en el login:', err);
-          
-          if (err.status === 401) {
-            alert('Credenciales incorrectas.');
+      this.authService
+        .login(this.formularioLogin.value)
+        .subscribe((success) => {
+          if (success) {
+            this.router.navigate(['/']); // Redirigir a Inicio
           } else {
-            alert('Error de conexión con el servidor.');
+            alert('Credenciales incorrectas. Inténtalo de nuevo.');
           }
-        }
-      });
+        });
     } else {
       alert('Formulario inválido.');
     }

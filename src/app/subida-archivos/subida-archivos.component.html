@@ -6,9 +6,10 @@
                 <form class="formulario-subida" [formGroup]="formularioSubida" (ngSubmit)="onSubmit()">
 
                     <div class="grupo-formulario">
-                        <!-- Custom File Input -->
+                        <!-- Input de archivo oculto personalizado -->
                         <input type="file" id="file-upload" (change)="onFileSelected($event)" accept=".mp3,audio/*"
                             style="display: none;">
+                        <!-- Label que actúa como botón de subida -->
                         <label for="file-upload" class="control-formulario" style="cursor: pointer; display: block;">
                             {{ nombreArchivo || 'Introduzca el archivo mp3' }}
                         </label>
@@ -22,11 +23,8 @@
                     <div class="grupo-formulario">
                         <input type="text" formControlName="categoria" placeholder="Seleccione categoria"
                             class="control-formulario" [hidden]="true">
-                        <!-- Using select but styling it similar to text input as per design or SCSS? 
-                             SCSS doesn't specifically style select differently than control-formulario.
-                             Design Image 0 shows "Seleccione categoria" as a text box or dropdown.
-                             Existing HTML used a select. I'll keep select but apply class control-formulario.
-                        -->
+
+                        <!-- Desplegable de categorías estilizado -->
                         <select class="control-formulario" formControlName="categoria">
                             <option value="" disabled selected>Seleccione categoria</option>
                             <option value="naturaleza">Naturaleza</option>
@@ -46,43 +44,13 @@
                             class="control-formulario">
                     </div>
 
-                    <!-- Note: Image 0 doesn't show "Notas adicionales" textarea, but existing HTML had it. 
-                         I'll check if I should keep it. Image 0 shows: File, Name, Category, Autor, Description, (Last bar empty?).
-                         Last bar might be description or something else.
-                         I'll keep the textarea if it was there, or hiding it if it breaks design.
-                         Given the "revisa bien 1 a 1", the design image 0 has 5 inputs + 1 empty at bottom?
-                         1. Introduzca archivo mp3
-                         2. (Unknown bar, maybe progress bar place if empty? No, progress is on right)
-                         Wait, Image 0 left side:
-                         - Bar 1: Introduzca el archivo mp3
-                         - Bar 2: (Empty/Line?)
-                         - Bar 3: Nombre el archivo
-                         - Bar 4: (Empty?)
-                         - Bar 5: Seleccione categoria
-                         - Bar 6: (Empty?)
-                         - Bar 7: Autor
-                         - Bar 8: (Empty?)
-                         - Bar 9: Descripción
-                         - Bar 10: (Empty?)
-                         
-                         It looks like each input has a "shadow" or double bar? Or maybe just bad spacing in my reading.
-                         Actually, looking closely at Image 0:
-                         Input "Introduzca el archivo mp3"
-                         Input "Nombre el archivo"
-                         Input "Seleccione categoria"
-                         Input "Autor"
-                         Input "Descripción"
-                         Input (Empty)
-
-                         The existing HTML has specific fields. I'll map them to `control-formulario`.
-                         I will add the empty one or just the textarea as the last one.
-                    -->
                     <div class="grupo-formulario">
                         <input type="text" formControlName="notas" placeholder="" class="control-formulario">
                     </div>
 
 
                     <div class="acciones-subida">
+                        <!-- Deshabilito el botón si no hay archivo o el formulario es inválido -->
                         <button type="submit" class="boton-confirmar"
                             [disabled]="formularioSubida.invalid || !archivoSeleccionado">
                             confirmar
@@ -103,7 +71,7 @@
                         <span class="material-icons-outlined icono-subida">upload</span>
                     </div>
 
-                    <!-- Progress Bar -->
+                    <!-- Barra de progreso visual -->
                     <div class="barra-carga">
                         <div class="progreso" [style.width.%]="porcentaje"></div>
                     </div>

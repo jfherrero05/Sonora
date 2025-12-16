@@ -1,138 +1,133 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-// AÑADIDO: Importar HttpClient y operadores para manejar la respuesta
 import { HttpClient } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
-// Asumo que la interfaz User existe, si no, usa una nueva o 'any'
-import { User } from '../interfaces/user.interface'; 
+import { User } from '../interfaces/user.interface';
 
+// Defino las interfaces aquí mismo para tener claro qué datos recibo y envío en la autenticación.
 
-// -------------------------------------------------------------
-// INTERFACES (Definiciones para tipos de datos)
-// -------------------------------------------------------------
-// Interfaz para la respuesta de LOGIN/REGISTRO del Backend
+// Esta interfaz estructura la respuesta que espero del servidor al hacer login o registro.
 interface AuthResponse {
   mensaje: string;
   token: string;
-  id_usuario?: number; // Opcional, dependiendo de si lo devuelves en ambas
-  nombre_usuario: string; 
-  es_administrador?: number; // Solo si lo usas en el registro
+  id_usuario?: number;
+  nombre_usuario: string;
+  es_administrador?: number;
 }
 
-// Interfaz para los datos que enviamos al Backend
+// Utilizo esta interfaz para tipar los datos que envío al intentar iniciar sesión o registrarme.
 interface Credentials {
   email: string;
   password: string;
-  nombre_usuario?: string; // Solo para registro
+  nombre_usuario?: string; // Este campo es opcional porque solo lo necesito en el registro.
 }
-
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  // CLAVE PARA EL LOCALSTORAGE
+  // Defino la clave que usaré para guardar el token en el LocalStorage.
   private TOKEN_KEY = 'jwt_token';
-  
-  // URL base de tu backend Node.js (¡IMPORTANTE!)
+
+  // Establezco la URL base de mi API para las operaciones de usuarios.
   private baseUrl = 'http://localhost:3000/api/usuarios';
 
-  // Mantenemos BehaviorSubject para el estado de Angular
+  // Uso BehaviorSubject para mantener y emitir el estado actual de si el usuario está logueado o no.
+  // Lo inicializo comprobando si ya existe un token válido.
   private loggedIn = new BehaviorSubject<boolean>(this.checkLoginStatus());
+
+  // Este BehaviorSubject guarda los datos del usuario actual para acceder a ellos desde cualquier parte de la app.
   private currentUserSubject = new BehaviorSubject<any>(
     this.getUserFromStorage()
   );
 
-  // AÑADIDO: Inyectar HttpClient
   constructor(private http: HttpClient) {}
 
-  // Observable para el estado de autenticación
+  // Expongo el estado de conexión como un Observable para que los componentes puedan suscribirse a los cambios.
   get isLoggedIn$(): Observable<boolean> {
     return this.loggedIn.asObservable();
   }
 
+  // De igual forma, expongo los datos del usuario actual.
   get currentUser$(): Observable<any> {
     return this.currentUserSubject.asObservable();
   }
-  
-  // -------------------------------------------------------------
-  // FUNCIÓN DE LOGIN (Ahora conectada a la BBDD)
-  // -------------------------------------------------------------
+
+  // Realizo la petición de login al servidor.
   login(credentials: Credentials): Observable<AuthResponse> {
     const url = `${this.baseUrl}/login`;
 
-    // 1. Petición POST al backend
     return this.http.post<AuthResponse>(url, credentials).pipe(
-      tap(response => {
-        // 2. Si es exitoso (código 200), guardamos el token y la sesión
+      tap((response) => {
+        // Si el login es correcto y recibo un token, guardo la sesión inmediatamente.
         if (response.token) {
-          this.setSession(response.token, response.nombre_usuario, response.id_usuario);
+          this.setSession(
+            response.token,
+            response.nombre_usuario,
+            response.id_usuario
+          );
         }
       })
-      // NOTA: Si el login falla (ej. 401), el 'error' se maneja en el .subscribe() del componente.
     );
   }
 
-  // -------------------------------------------------------------
-  // FUNCIÓN DE REGISTRO (Ahora conectada a la BBDD)
-  // -------------------------------------------------------------
+  // Gestiono el registro de nuevos usuarios.
   register(userData: Credentials): Observable<AuthResponse> {
     const url = `${this.baseUrl}/registro`;
 
-    // 1. Petición POST al backend
     return this.http.post<AuthResponse>(url, userData).pipe(
-      tap(response => {
-        // 2. Si es exitoso (código 201), guardamos el token y la sesión (auto-login)
+      tap((response) => {
+        // Al registrarse con éxito, inicio sesión automáticamente con el token recibido.
         if (response.token) {
-          this.setSession(response.token, response.nombre_usuario, response.id_usuario);
+          this.setSession(
+            response.token,
+            response.nombre_usuario,
+            response.id_usuario
+          );
         }
       })
     );
   }
 
-  // -------------------------------------------------------------
-  // FUNCIÓN DE LOGOUT
-  // -------------------------------------------------------------
+  // Cierro la sesión eliminando todo rastro del usuario en el LocalStorage y actualizando los observables.
   logout() {
-    localStorage.removeItem(this.TOKEN_KEY); // Borra el token
-    localStorage.removeItem('sonora_current_user'); 
+    localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem('sonora_current_user');
     this.loggedIn.next(false);
     this.currentUserSubject.next(null);
   }
 
-  // -------------------------------------------------------------
-  // FUNCIÓN PARA ESTABLECER LA SESIÓN
-  // -------------------------------------------------------------
-  private setSession(token: string, nombre_usuario: string, id_usuario: number | undefined) {
-    // 1. Guardar el Token JWT
-    localStorage.setItem(this.TOKEN_KEY, token); 
-    
-    // 2. Guardar datos básicos del usuario (opcional, pero útil)
+  // Método privado auxiliar para guardar los datos de sesión y notificar a la app.
+  private setSession(
+    token: string,
+    nombre_usuario: string,
+    id_usuario: number | undefined
+  ) {
+    localStorage.setItem(this.TOKEN_KEY, token);
+
     const userPayload = {
-        id_usuario: id_usuario, 
-        nombre_usuario: nombre_usuario 
+      id_usuario: id_usuario,
+      nombre_usuario: nombre_usuario,
     };
     localStorage.setItem('sonora_current_user', JSON.stringify(userPayload));
-    
-    // 3. Notificar a Angular del cambio de estado
+
+    // Emito los nuevos valores para que la interfaz se actualice al instante.
     this.loggedIn.next(true);
     this.currentUserSubject.next(userPayload);
   }
-  
-  // -------------------------------------------------------------
-  // FUNCIONES DE COMPROBACIÓN (Actualizadas para usar el Token)
-  // -------------------------------------------------------------
 
+  // Recupero el token actual si existe.
   getToken(): string | null {
-      return localStorage.getItem(this.TOKEN_KEY);
+    return localStorage.getItem(this.TOKEN_KEY);
   }
 
+  // Compruebo si tenemos un token guardado para determinar si el usuario está conectado.
   private checkLoginStatus(): boolean {
-    // Comprueba si existe un token JWT válido
     const token = this.getToken();
-    return !!token; // Si hay token, se considera logueado (simplificado)
+    return !!token;
   }
 
+  // Intento recuperar y parsear los datos del usuario guardados en LocalStorage. Si falla, devuelvo null.
   private getUserFromStorage(): any {
     const user = localStorage.getItem('sonora_current_user');
     try {

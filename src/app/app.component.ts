@@ -17,17 +17,18 @@ export class AppComponent {
   constructor(private authService: AuthService, private router: Router) {
     this.isLoggedIn$ = this.authService.isLoggedIn$;
 
-    // Escuchar cambios de ruta para ocultar botones en registro/login/subida
+    // Me suscribo a los eventos del router para saber en qué página estoy.
+    // Esto me permite ocultar o mostrar ciertos botones si estoy en la página de inicio o no.
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: any) => {
-        // Solo mostrar en la raíz '/'
+        // Verifico si la URL actual tras las redirecciones es la raíz '/'.
         this.isHomePage = event.urlAfterRedirects === '/';
       });
   }
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/']); // Recargar o asegurar estar en home
+    this.router.navigate(['/']); // Al cerrar sesión, redirijo al usuario al inicio por seguridad.
   }
 }
