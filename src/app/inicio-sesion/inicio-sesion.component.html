@@ -11,13 +11,18 @@
             <form class="formulario-autenticacion" [formGroup]="formularioLogin" (ngSubmit)="onSubmit()">
 
                 <div class="grupo-formulario">
-                    <input type="email" id="email" formControlName="email" class="control-formulario"
-                        placeholder="introduzca el nombre">
-                    <!-- Note: Placeholder mantengo "introduzca el nombre" por fidelidad al diseño original aunque sea un email -->
-
-                    <!-- Muestro un mensaje de error rojo si el usuario ha tocado el campo y el email no es válido -->
-                    <small *ngIf="formularioLogin.get('email')?.invalid && formularioLogin.get('email')?.touched"
-                        style="color: red; display: block; margin-top: 5px;">
+                    <input type="email" id="email" formControlName="email" class="control-formulario" placeholder="introduzca el nombre">
+                    <!-- Note: Placeholder in image says "introduzca el nombre" which is weird for email, but keeping consistence with existing code logic (email) vs design text (name). 
+                         Actually design image 1 says: "introduzca el nombre", "Introduzcan los apellidos", "Correo electronico", "Contraseña". 
+                         Wait, image 1 is REGISTER page (it has many fields).
+                         Image 2 is LOGIN page (profile pic "Editar foto de perfil", "Correo electronico", "Contraseña").
+                         Image 0 is UPLOAD page? No, Image 0 is Upload.
+                         Let's re-verify images.
+                         Image 2: "Editar foto de perfil" (circle), "Correo electronico", "Contraseña".
+                         So Login page needs "Correo electronico" and "Contraseña".
+                    -->
+                    
+                    <small *ngIf="formularioLogin.get('email')?.invalid && formularioLogin.get('email')?.touched" style="color: red; display: block; margin-top: 5px;">
                         Introduce un correo válido
                     </small>
                 </div>

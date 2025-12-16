@@ -18,31 +18,27 @@ export class InicioSesionComponent {
     private authService: AuthService,
     private router: Router
   ) {
-    // Configuro el formulario definiendo los campos email y contraseña como obligatorios.
-    // Además valido que el email tenga formato correcto y la contraseña al menos 6 caracteres.
+    // Creamos el formulario con validaciones
     this.formularioLogin = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  // Este método se activa cuando el usuario pulsa el botón de 'Confirmar'.
+  // Esto se ejecuta al pulsar el botón
   onSubmit() {
     if (this.formularioLogin.valid) {
-      // Si el formulario está bien, envío los datos al servicio de autenticación.
       this.authService
         .login(this.formularioLogin.value)
         .subscribe((success) => {
           if (success) {
-            // Si el login es correcto, mando al usuario a la página principal.
-            this.router.navigate(['/']);
+            this.router.navigate(['/']); // Redirigir a Inicio
           } else {
-            // Si falla (ej. contraseña mal), aviso al usuario.
             alert('Credenciales incorrectas. Inténtalo de nuevo.');
           }
         });
     } else {
-      alert('Formulario inválido. Revisa los campos.');
+      alert('Formulario inválido.');
     }
   }
 }

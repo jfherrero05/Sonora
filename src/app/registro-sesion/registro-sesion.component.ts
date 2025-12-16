@@ -16,8 +16,6 @@ export class RegistroSesionComponent {
     private authService: AuthService,
     private router: Router
   ) {
-    // Configuro el formulario de registro con todos los campos necesarios.
-    // Valido que las contraseñas tengan longitud mínima y que el email sea correcto.
     this.formularioRegistro = this.fb.group({
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
@@ -34,20 +32,19 @@ export class RegistroSesionComponent {
       const pass = this.formularioRegistro.get('password')?.value;
       const confirm = this.formularioRegistro.get('confirmPassword')?.value;
 
-      // Una comprobación extra de seguridad para asegurar que el usuario no se equivocó al escribir la clave.
       if (pass !== confirm) {
         alert('Las contraseñas no coinciden.');
         return;
       }
 
-      // Si todo es correcto, envío los datos de registro al servicio.
       this.authService
-        .register(this.formularioRegistro.value)
-        .subscribe((success) => {
-          if (success) {
+        .register(datosParaBackend)
+        .subscribe({
+          next: (response) => {
+            // Este bloque se ejecuta si el servidor responde 200 o 201 OK
+            console.log('Registro exitoso:', response);
             alert('¡Registro completado! Bienvenido.');
-            // Si el registro funciona, el servicio de auth ya habrá hecho autologin, así que voy al home.
-            this.router.navigate(['/']);
+            this.router.navigate(['/']); // Ir a Inicio
           } else {
             alert(
               'Error al registrar. El usuario ya existe o hubo un problema.'
@@ -55,7 +52,7 @@ export class RegistroSesionComponent {
           }
         });
     } else {
-      alert('Por favor, rellena todos los campos obligatorios.');
+      alert('Por favor, rellena todos los campos obligatorios correctamente.');
     }
   }
 }
