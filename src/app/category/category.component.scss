@@ -1,0 +1,14 @@
+.grid-sonidos-categoria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+  width: 100%;
+}
+
+.tarjeta-sonido {
+  /* Ensure cards have some basic styling if global styles don't cover everything or if flex context was needed */
+  /* Assuming global .tarjeta-sonido handles background, border-radius etc. */
+  /* Just ensuring it takes space nicely in grid */
+  min-width: 0;
+}

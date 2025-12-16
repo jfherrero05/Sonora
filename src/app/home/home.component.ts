@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { SoundService } from '../service/sound.service';
 import { Sound } from '../interfaces/sound.interface';
 
@@ -23,7 +24,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   sonidosInstrumentos: Sound[] = [];
   sonidosExtranos: Sound[] = [];
 
-  constructor(private soundService: SoundService) {}
+  // Variable para el buscador
+  terminoBusqueda: string = '';
+
+  constructor(private soundService: SoundService, private router: Router) {}
 
   ngOnInit() {
     // Al cargar el componente, pido todos los sonidos disponibles al servicio.
@@ -220,6 +224,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.audioActual && this.audioActual.duration) {
       const tiempo = (valor / 100) * this.audioActual.duration;
       this.audioActual.currentTime = tiempo;
+    }
+  }
+  buscarSonidos() {
+    if (this.terminoBusqueda.trim()) {
+      this.router.navigate(['/buscar', this.terminoBusqueda.trim()]);
     }
   }
 }

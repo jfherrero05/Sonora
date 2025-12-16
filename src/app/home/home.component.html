@@ -2,11 +2,13 @@
     <!-- Contenedor principal del buscador con el título de bienvenida -->
     <div class="contenedor-busqueda-principal">
         <div class="barra-busqueda">
-            <span class="material-icons-outlined icono-lupa">search</span>
-            <input type="text" class="input-busqueda" placeholder="Buscar...">
+            <span class="material-icons-outlined icono-lupa" (click)="buscarSonidos()"
+                style="cursor: pointer;">search</span>
+            <input type="text" class="input-busqueda" placeholder="Buscar..." [(ngModel)]="terminoBusqueda"
+                (keyup.enter)="buscarSonidos()">
         </div>
-        <div class="etiqueta-encuentre">
-            Encuentre todo tipo de sonidos
+        <div>
+            ENCUENTRE TODO TIPO DE SONIDOS
         </div>
     </div>
 
@@ -26,16 +28,16 @@
     <div class="seccion-categorias">
         <h2 class="titulo-seccion">categorías</h2>
         <div class="grid-categorias">
-            <button class="boton-categoria">Naturaleza</button>
-            <button class="boton-categoria">Instrumentos</button>
-            <button class="boton-categoria">Gritos</button>
-            <button class="boton-categoria">Musica</button>
-            <button class="boton-categoria">Efectos especiales</button>
-            <button class="boton-categoria">Notificacion</button>
-            <button class="boton-categoria">Transicion</button>
-            <button class="boton-categoria">Silbidos</button>
-            <button class="boton-categoria">Coches</button>
-            <button class="boton-categoria">Motos</button>
+            <button class="boton-categoria" [routerLink]="['/categoria', 'Naturaleza']">Naturaleza</button>
+            <button class="boton-categoria" [routerLink]="['/categoria', 'Instrumento']">Instrumentos</button>
+            <button class="boton-categoria" [routerLink]="['/categoria', 'Grito']">Gritos</button>
+            <button class="boton-categoria" [routerLink]="['/categoria', 'Musica']">Musica</button>
+            <button class="boton-categoria" [routerLink]="['/categoria', 'Efectos']">Efectos especiales</button>
+            <button class="boton-categoria" [routerLink]="['/categoria', 'Notificacion']">Notificacion</button>
+            <button class="boton-categoria" [routerLink]="['/categoria', 'Transicion']">Transicion</button>
+            <button class="boton-categoria" [routerLink]="['/categoria', 'Silbido']">Silbidos</button>
+            <button class="boton-categoria" [routerLink]="['/categoria', 'Coche']">Coches</button>
+            <button class="boton-categoria" [routerLink]="['/categoria', 'Moto']">Motos</button>
         </div>
     </div>
 

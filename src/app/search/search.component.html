@@ -1,0 +1,33 @@
+<div class="pagina-inicio">
+    <div class="seccion-tops" style="padding-top: 100px;">
+        <h2 class="titulo-principal-tops" style="text-transform: uppercase;">Resultados para: {{ terminoBusqueda }}</h2>
+
+        <div class="grid-sonidos-categoria">
+            <div class="tarjeta-sonido" *ngFor="let sonido of listaSonidos; let i = index">
+                <div class="controles-reproductor">
+                    <input type="range" class="slider-progreso" [value]="sonidoActualIndice === i ? progresoActual : 0"
+                        (input)="buscarPosicion($event)" step="0.1" min="0" max="100">
+                    <div class="botones-reproduccion"
+                        style="display: flex; gap: 5px; justify-content: center; align-items: center;">
+                        <span class="material-icons-outlined" (click)="replaySonido(sonido, i)" title="Replay"
+                            style="cursor: pointer;">replay</span>
+                        <span class="material-icons-outlined" (click)="toggleReproduccion(sonido, i)" title="Play/Pause"
+                            style="cursor: pointer; font-size: 2rem;">
+                            {{ sonidoActualIndice === i && estaReproduciendo ? 'pause_circle' : 'play_circle' }}
+                        </span>
+                        <span class="material-icons-outlined" (click)="stopSonido(sonido, i)" title="Stop"
+                            style="cursor: pointer;">stop_circle</span>
+                        <span class="material-icons-outlined" title="Download" style="cursor: pointer;">download</span>
+                    </div>
+                </div>
+                <div class="info-sonido">
+                    <p>{{ sonido.titulo }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="listaSonidos.length === 0" style="text-align: center; color: white;">
+            <p>No se encontraron sonidos con ese nombre.</p>
+        </div>
+    </div>
+</div>

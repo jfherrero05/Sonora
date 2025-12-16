@@ -1,0 +1,11 @@
+.grid-sonidos-categoria {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+  width: 100%;
+}
+
+.tarjeta-sonido {
+  min-width: 0;
+}
