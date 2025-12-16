@@ -16,6 +16,7 @@ export class RegistroSesionComponent {
     private authService: AuthService,
     private router: Router
   ) {
+    // Definimos el formulario 
     this.formularioRegistro = this.fb.group({
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
@@ -23,7 +24,6 @@ export class RegistroSesionComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
       pais: ['', Validators.required],
-      // ciudad eliminado según solicitud
     });
   }
 
@@ -32,25 +32,40 @@ export class RegistroSesionComponent {
       const pass = this.formularioRegistro.get('password')?.value;
       const confirm = this.formularioRegistro.get('confirmPassword')?.value;
 
+      // Validación de contraseñas coincidentes en el cliente
       if (pass !== confirm) {
         alert('Las contraseñas no coinciden.');
         return;
       }
 
+      // Datos al formato del Backend{ nombre_usuario, email, password }
+      const datosParaBackend = {
+        nombre_usuario: `${this.formularioRegistro.value.nombre} ${this.formularioRegistro.value.apellidos}`,
+        email: this.formularioRegistro.value.email,
+        password: this.formularioRegistro.value.password
+      };
+
+      // Envío de la petición a través del servicio
       this.authService
-        .register(this.formularioRegistro.value)
-        .subscribe((success) => {
-          if (success) {
+        .register(datosParaBackend)
+        .subscribe({
+          next: (response) => {
+            // Este bloque se ejecuta si el servidor responde 200 o 201 OK
+            console.log('Registro exitoso:', response);
             alert('¡Registro completado! Bienvenido.');
-            this.router.navigate(['/']); // Ir a Inicio
-          } else {
-            alert(
-              'Error al registrar. El usuario ya existe o hubo un problema.'
-            );
+            this.router.navigate(['/']); // Redirigir al inicio o home
+          },
+          error: (err) => {
+            // Este bloque captura errores como el 400 (Bad Request) o 500
+            console.error('Error detallado del servidor:', err);
+            
+            // Intentamos mostrar el mensaje de error que viene del backend
+            const mensajeError = err.error?.mensaje || 'Error al registrar. Inténtalo de nuevo.';
+            alert(mensajeError);
           }
         });
     } else {
-      alert('Por favor, rellena todos los campos obligatorios.');
+      alert('Por favor, rellena todos los campos obligatorios correctamente.');
     }
   }
 }

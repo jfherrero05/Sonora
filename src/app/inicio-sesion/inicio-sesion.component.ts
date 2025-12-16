@@ -16,27 +16,33 @@ export class InicioSesionComponent {
     private authService: AuthService,
     private router: Router
   ) {
-    // Creamos el formulario con validaciones
     this.formularioLogin = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  // Esto se ejecuta al pulsar el botón
   onSubmit() {
     if (this.formularioLogin.valid) {
-      this.authService
-        .login(this.formularioLogin.value)
-        .subscribe((success) => {
-          if (success) {
-            this.router.navigate(['/']); // Redirigir a Inicio
+      // Llamamos al servicio pasando { email, password }
+      this.authService.login(this.formularioLogin.value).subscribe({
+        next: (res) => {
+          console.log('Login exitoso:', res);
+          this.router.navigate(['/']); // Redirigir a Inicio
+        },
+        error: (err) => {
+          // Si el servidor devuelve 401 (Unauthorized), caerá aquí
+          console.error('Error en el login:', err);
+          
+          if (err.status === 401) {
+            alert('Credenciales incorrectas.');
           } else {
-            alert('Credenciales incorrectas. Inténtalo de nuevo.');
+            alert('Error de conexión con el servidor.');
           }
-        });
+        }
+      });
     } else {
-      alert('Formulario inválido. Revisa los campos.');
+      alert('Formulario inválido.');
     }
   }
 }
