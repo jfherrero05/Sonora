@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 // Importo el módulo de formularios reactivos para manejar los formularios de login, registro y subida.
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -9,6 +10,8 @@ import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 import { SubidaArchivosComponent } from './subida-archivos/subida-archivos.component';
 import { RegistroSesionComponent } from './registro-sesion/registro-sesion.component';
 import { HomeComponent } from './home/home.component';
+import { CategoryComponent } from './category/category.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,8 @@ import { HomeComponent } from './home/home.component';
     SubidaArchivosComponent,
     RegistroSesionComponent,
     HomeComponent,
+    CategoryComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +30,7 @@ import { HomeComponent } from './home/home.component';
     // Importo los módulos necesarios para que funcionen los formularios y las peticiones HTTP en toda la app.
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
