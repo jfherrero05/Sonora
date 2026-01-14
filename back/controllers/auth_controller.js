@@ -64,9 +64,9 @@ exports.registro = async (req, res) => {
         // Respuesta 
         res.status(201).json({
             mensaje: 'Usuario registrado correctamente. Sesión iniciada.',
-            token: token, // Enviamos el token para que el frontend inicie sesión automáticamente
+            token: token,
             usuario: nuevoUsuario,
-            id_usuario: usuario.id_usuario
+            id_usuario: nuevoUsuario.id_usuario 
         });
 
     } catch (error) {

@@ -40,6 +40,24 @@ app.get('/', (req, res) => {
     });
 });
 
+//Conseguir audios
+app.get('/api/canciones', async (req, res) => {
+    try {
+        const [audios] = await db.query('SELECT * FROM canciones');
+
+        res.status(200).json({
+            mensaje: 'Audios obtenidos correctamente',
+            audios: audios
+        });
+    } catch (error) {
+        console.error('Error al obtener los audios:', error);
+        res.status(500).json({
+            mensaje: 'Error al obtener los audios',
+            error: error
+        });
+    }
+});
+
 // -----------------------------------------------------------------
 // Iniciar Servidor
 // -----------------------------------------------------------------

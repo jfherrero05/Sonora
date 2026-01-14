@@ -1,0 +1,11 @@
+<div class="main-interface">
+    <app-audio-search></app-audio-search>
+
+    <section class="category-section">
+        <h3>Audios Recientes</h3>
+        <div class="audio-row">
+            <app-audio-card *ngFor="let item of listaAudios" [audio]="item">
+            </app-audio-card>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,28 @@
+<div class="audio-card">
+    <div class="progress-container">
+        <div class="progress-bar" [style.width.%]="progreso"></div>
+        <div class="progress-dot" [style.left.%]="progreso"></div>
+    </div>
+
+    <div class="card-content">
+        <div class="audio-controls">
+            <audio #player [src]="audio.url" (timeupdate)="actualizarProgreso(player)"></audio>
+
+            <button class="control-btn" (click)="reiniciar(player)">
+                <i class="fa fa-undo"></i> </button>
+
+            <button class="control-btn play-btn" (click)="toggleAudio(player)">
+                <span>{{ isPlaying ? '⏸' : '▶' }}</span>
+            </button>
+
+            <button class="control-btn" (click)="descargar()">
+                <i class="fa fa-download"></i>
+            </button>
+        </div>
+
+        <div class="audio-info">
+            <p class="audio-title">{{ audio.titulo }}</p>
+            <p class="audio-meta">{{ audio.categoria }} | {{ audio.formato }}</p>
+        </div>
+    </div>
+</div>
